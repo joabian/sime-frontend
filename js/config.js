@@ -20,7 +20,19 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
     });
 
     $stateProvider
-
+        .state('areas', {
+            abstract: true,
+            url: "/areas",
+            templateUrl: "views/common/content.html",
+        })
+        .state('areas.areas', {
+            url: "/areas",
+            templateUrl: "views/areas.html",
+        })
+        .state('areas.tablero', {
+            url: "/tablero",
+            templateUrl: "views/tablero.html",
+        })
         .state('dashboards', {
             abstract: true,
             url: "/dashboards",
