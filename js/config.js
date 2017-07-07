@@ -21,6 +21,16 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
 
     $stateProvider
 
+         .state('tickets.main', {
+             abstract: true,
+             url: "/tickets",
+             templateUrl: "views/main.html",
+         })
+         .state('tickets.minor', {
+             abstract: true,
+             url: "/tickets",
+             templateUrl: "views/minor.html",
+         })
         .state('dashboards', {
             abstract: true,
             url: "/dashboards",
