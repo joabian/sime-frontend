@@ -25,6 +25,20 @@
                     IN+
                 </div>
             </li>
+            <li ng-class="{active: $state.includes('equipos')}">
+                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'Equipos' | translate }}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('areas')}">
+                    <li ui-sref-active="active"><a ui-sref="equipos.agregarequipo">{{ 'Agregar' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="equipos.verinventario">{{ 'Inventario' | translate }} </a></li>
+                </ul>
+            </li>
+            <li ng-class="{active: $state.includes('areas')}">
+                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'Tickets' | translate }}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('areas')}">
+                    <li ui-sref-active="active"><a ui-sref="tickets.main">{{ 'Main' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="tickets.minor">{{ 'Minor' | translate }} </a></li>
+                </ul>
+            </li>
             <li ng-class="{active: $state.includes('areas')}">
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'Areas Mantenimiento' | translate }}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('areas')}">

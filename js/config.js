@@ -21,6 +21,19 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
 
     $stateProvider
 
+        .state('equipos', {
+            abstract: true,
+            url: "/equipos",
+            templateUrl: "views/common/content.html",
+        })
+         .state('equipos.agregarequipo', {
+             url: "/agregarequipo",
+             templateUrl: "views/agregarequipo.html",
+         })
+         .state('equipos.verinventario', {
+             url: "/verinventario",
+             templateUrl: "views/verinventario.html",
+         })
         .state('tickets', {
             abstract: true,
             url: "/tickets",
