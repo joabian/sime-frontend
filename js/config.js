@@ -34,6 +34,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
              url: "/verinventario",
              templateUrl: "views/verinventario.html",
          })
+
         .state('tickets', {
             abstract: true,
             url: "/tickets",
@@ -46,6 +47,24 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
          .state('tickets.minor', {
              url: "/tickets",
              templateUrl: "views/minor.html",
+         })
+
+        .state('incidencias', {
+            abstract: true,
+            url: "/incidencias",
+            templateUrl: "views/common/content.html",
+        })
+         .state('incidencias.incidencia', {
+             url: "/incidencias",
+             templateUrl: "views/incidencia.html",
+         })
+         .state('incidencias.solucion', {
+             url: "/incidencias",
+             templateUrl: "views/solucion.html",
+         })
+         .state('incidencias.board', {
+             url: "/incidencias",
+             templateUrl: "views/board.html",
          })
 
         .state('areas', {
