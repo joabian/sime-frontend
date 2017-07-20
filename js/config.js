@@ -12,7 +12,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
     IdleProvider.idle(5); // in seconds
     IdleProvider.timeout(120); // in seconds
 
-    $urlRouterProvider.otherwise("/dashboards/dashboard_1");
+    $urlRouterProvider.otherwise("/equipos/agregarequipo");
 
     $ocLazyLoadProvider.config({
         // Set to true if you want to see what and when is dynamically loaded
@@ -34,20 +34,32 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
              url: "/verinventario",
              templateUrl: "views/verinventario.html",
          })
+
         .state('tickets', {
             abstract: true,
             url: "/tickets",
             templateUrl: "views/common/content.html",
         })
-         .state('tickets.main', {
+         .state('tickets.reportelink', {
              url: "/tickets",
-             templateUrl: "views/main.html",
+             templateUrl: "views/reportelink.html",
          })
          .state('tickets.minor', {
              url: "/tickets",
-             templateUrl: "views/minor.html",
+             templateUrl: "views/reporteform.html",
          })
-
+          .state('incidencias', {
+              url: "/incidencias",
+              templateUrl: "views/incidencias.html",
+              data: { pageTitle: 'Incidencias' }
+          })
+             
+         .state('sucursales', {
+             url: "/sucursales",
+             templateUrl: "views/sucursales.html",
+             data: { pageTitle: 'Sucursales' }
+         })
+        
         .state('areas', {
             abstract: true,
             url: "/areas",

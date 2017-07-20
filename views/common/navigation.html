@@ -8,17 +8,17 @@
                     <a uib-dropdown-toggle href>
                             <span class="clear">
                                 <span class="block m-t-xs">
-                                    <strong class="font-bold">David Williams</strong>
+                                    <strong class="font-bold">Juan Perez</strong>
                              </span>
-                                <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+                                <span class="text-muted text-xs block">Supervisor de Mantenimiento<b class="caret"></b></span>
                             </span>
                     </a>
                     <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
-                        <li><a ui-sref="app.profile">Profile</a></li>
-                        <li><a ui-sref="app.contacts">Contacts</a></li>
-                        <li><a ui-sref="mailbox.inbox">Mailbox</a></li>
+                        <li><a ui-sref="app.profile">Perfil</a></li>
+                        <li><a ui-sref="app.contacts">Contacto</a></li>
+                        <!--<li><a ui-sref="mailbox.inbox">Mailbox</a></li>-->
                         <li class="divider"></li>
-                        <li><a ui-sref="login">Logout</a></li>
+                        <li><a ui-sref="login">Salir</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -32,12 +32,19 @@
                     <li ui-sref-active="active"><a ui-sref="equipos.verinventario">{{ 'Inventario' | translate }} </a></li>
                 </ul>
             </li>
-            <li ng-class="{active: $state.includes('areas')}">
+            <li ng-class="{active: $state.includes('tickets')}">
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'Tickets' | translate }}</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('areas')}">
-                    <li ui-sref-active="active"><a ui-sref="tickets.main">{{ 'Main' | translate }} </a></li>
-                    <li ui-sref-active="active"><a ui-sref="tickets.minor">{{ 'Minor' | translate }} </a></li>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('tickets')}">
+                    <li ui-sref-active="active"><a ui-sref="tickets.reportelink">{{ 'Link' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="tickets.reporteform">{{ 'Formulario' | translate }} </a></li>
                 </ul>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="incidencias"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'Incidencias' | translate }}</span> </a>
+            </li>
+           
+            <li ui-sref-active="active">
+                <a ui-sref="sucursales"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'Sucursales' | translate }}</span> </a>
             </li>
             <li ng-class="{active: $state.includes('areas')}">
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'Areas Mantenimiento' | translate }}</span> <span class="fa arrow"></span></a>
