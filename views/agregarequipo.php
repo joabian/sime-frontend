@@ -1,13 +1,13 @@
-<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CategoriaCtrl">
+<class="wrapper wrapper-content animated fadeInRight">
 <div class="row">
 	<div class="col-lg-10">
             <div class="ibox float-e-margins">
 						<div class="ibox-title text-center">
-                            <h5>Registrar equipo</h5>
+                            <h5>Registrar equipo con php</h5>
       
                         </div>
                         <div class="ibox-content">
-                            <form class="form-horizontal" >
+                            <form class="form-horizontal">
                                
 								<div class="form-group"><label class="col-sm-2 control-label">Nombre</label>
                                     <div class="col-sm-10"><input type="text" placeholder="Nombre" class="form-control"></div>
@@ -18,32 +18,27 @@
 								<div class="form-group"><label class="col-sm-2 control-label">Marca</label>
                                     <div class="col-sm-10"><input type="text" placeholder="Marca" class="form-control"></div>
 								</div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Cantidad</label>
-                                    <div class="col-sm-10"><input type="number" placeholder="Cantidad" id='cantidad' class="form-control"></div>
-                                </div>
- 
 								<div class="form-group"><label class="col-sm-2 control-label" >Categoria</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control" name="CategoriaEquipo" id="CategoriaEquipo"
-                                                ng-options="categoria.nombre for categoria in data.Categorias track by categoria.categoriaID"
-                                                ng-model="data.catego" ng-change="update()" >
-
-                                        </select>
+									<select class="form-control" name="CategoriaEquipo">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+										<option>XDXD</option>
+                                    </select>
 									</div>
-                                    
 								</div>
                                <div class="form-group"><label class="col-sm-2 control-label" >Subcategoria</label>
                                     <div class="col-sm-10">
-                                        <select  class="form-control" name="SubcategoriaEquipo" id="SubcategoriaEquipo"
-                                                ng-options="Subcategoria.nombre for Subcategoria in data2.Subcategorias track by Subcategoria.subcategoriaID"
-                                                ng-model="data2.subcategos">
-                                        </select>
+									<select class="form-control" name="SubcategoriaEquipo">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                    </select>
 									</div>
-                                   
 								</div>
-                               
-
                                 <div class="form-group"><label class="col-sm-2 control-label">Serializado</label>
 								 <div class="col-sm-10">
                                         <div class="i-checks"><label> <input type="checkbox" value=""> <i></i></label></div>
@@ -52,17 +47,7 @@
 								<div class="form-group"><label class="col-sm-2 control-label">Número de serie</label>
                                     <div class="col-sm-10"><input type="text" placeholder="Número de serie" class="form-control"></div>
 								</div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Sucursal</label>
-                                    <div class="col-sm-10">
-                                        <select class="form-control" name="sucursal" id='sucursal' ng-controller="SucursalesCtrl">
-                                            <option value=0 selected disabled>Sucursales</option>
-                                            <option value={{sucursal["idSucursal"]}} ng-repeat="sucursal in sucursales">{{sucursal["Nombre"]}}</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-
+								
                                 <div class="form-group"><label class="col-sm-2 control-label">Foto</label>
                                   <div class="col-sm-10">
                                       <div class="fileinput fileinput-new" data-provides="fileinput">
@@ -83,7 +68,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-4 col-sm-offset-2">
                                         <button class="btn btn-white" type="submit">Cancelar</button>
-                                       <button type="button" id="btnAddCategoria" ng-click="saveEquipo()" class="btn btn-info">Añadir</button>
+                                        <button class="btn btn-primary" type="submit" id="showtoast">Registrar</button>
                                     </div>
                                 </div>
                             </form>
@@ -92,11 +77,9 @@
     </div>
 </div>
 </div>
-<script type="text/javascript">
-    function showValor(val) {
-        alert(val);
-    }
-</script>
+
 <link href="css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
+
+
 <!-- Jasny -->
 <script src="js/plugins/jasny/jasny-bootstrap.min.js"></script>

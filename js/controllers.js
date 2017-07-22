@@ -3472,6 +3472,96 @@ function pdfCtrl($scope) {
     $scope.httpHeaders = { Authorization: 'Bearer some-aleatory-token' };
 }
 
+function ngGridCtrl($scope) {
+    $scope.ngData = [
+        { Name: "Moroni", Age: 50, Position: 'PR Menager', Status: 'active', Date: '12.12.2014' },
+        { Name: "Teancum", Age: 43, Position: 'CEO/CFO', Status: 'deactive', Date: '10.10.2014' },
+        { Name: "Jacob", Age: 27, Position: 'UI Designer', Status: 'active', Date: '09.11.2013' },
+        { Name: "Nephi", Age: 29, Position: 'Java programmer', Status: 'deactive', Date: '22.10.2014' },
+        { Name: "Joseph", Age: 22, Position: 'Marketing manager', Status: 'active', Date: '24.08.2013' },
+        { Name: "Monica", Age: 43, Position: 'President', Status: 'active', Date: '11.12.2014' },
+        { Name: "Arnold", Age: 12, Position: 'CEO', Status: 'active', Date: '07.10.2013' },
+        { Name: "Mark", Age: 54, Position: 'Analyst', Status: 'deactive', Date: '03.03.2014' },
+        { Name: "Amelia", Age: 33, Position: 'Sales manager', Status: 'deactive', Date: '26.09.2013' },
+        { Name: "Jesica", Age: 41, Position: 'Ruby programmer', Status: 'active', Date: '22.12.2013' },
+        { Name: "John", Age: 48, Position: 'Marketing manager', Status: 'deactive', Date: '09.10.2014' },
+        { Name: "Berg", Age: 19, Position: 'UI/UX Designer', Status: 'active', Date: '12.11.2013' }
+    ];
+}
+function SucursalesCtrl($scope) {
+    $scope.sucursales=[
+        "Sendero",
+        "Tecnológico",
+        "Panamericana",
+        "Zaragoza"
+    ];
+}
+function CategoriaCtrl($scope, $http) {
+
+   $http.get('http://localhost:49915/api/categoria/SelectAll').success(function (data) {
+        $scope.data = {
+            Categorias: data,
+            catego: { categoriaID: '1', nombre: 'Cardiovascular' }
+        }
+    });
+    $scope.update = function () {
+        
+        $http.get('http://localhost:49915/api/Subcategoria/SelectByCategoryID/' + $scope.data.catego.categoriaID).success(function (data2) {
+            
+            $scope.data2 = {
+                Subcategorias: data2,
+                subcategos: { subcategoriaID: "24", nombre: "N/A" }
+            }
+        });
+
+    }
+
+    $scope.saveEquipo = function () {
+
+        var equipo = {
+            codigo: "dxx",
+            descripcion: "sample string 3",
+            fechaIngreso: new Date(),
+            id_categoria: "1",
+            id_subcategoria: "1",
+            activo: true
+        };
+        console.log(equipo);
+        var saveEq = $http(
+        {
+            method: 'post',
+            data: equipo,
+            url: 'http://localhost:49915/api/Equipo/Add'
+        });
+
+        saveEq.then(function (d) {
+            alert("se salvo");
+        }, function (error) {
+            console.log('Oops! algo salio mal al momento de guardar los datos.')
+        })
+
+
+    }
+
+   
+
+
+}
+
+function equiposCtrl($scope) {
+    $scope.equiposInfo = [
+        { IdEquipo: 1, Nombre: "Caminadora", Modelo: "00D", IDSubcategoria: 1, Serializado: 1, NumSerie: 123, Descripcion: "Caminadora prueba1", Marca: "TestX", Status: 1 },
+        { IdEquipo: 2, Nombre: "Mancuernas", Modelo: "mk", IDSubcategoria: 1, Serializado: 1, NumSerie: 456, Descripcion: "Mancuernas 20lb", Marca: "TestX", Status: 1 },
+        { IdEquipo: 3, Nombre: "Bicicleta", Modelo:"asd",IDSubcategoria: 1,Serializado:1,NumSerie:588, Descripcion:"DescripcionDD",Marca:"sdf",Status:1},
+        { IdEquipo: 4, Nombre: "Banco olimpico", Modelo:"sdf",IDSubcategoria: 2,Serializado:1,NumSerie:2551, Descripcion:"Banco",Marca:"FVG",Status:1},
+        { IdEquipo: 5, Nombre: "Barra Z", Modelo:"fs",IDSubcategoria: 3,Serializado:1,NumSerie:448, Descripcion:"Barra Z 50lb",Marca:"asdb",Status:1},
+        { IdEquipo: 6, Nombre: "Maquina multiestacion", Modelo:"erg",IDSubcategoria: 2,Serializado:1,NumSerie:369, Descripcion:"8 estaciones",Marca:"sdd",Status:1}
+    ];
+}
+
+function pruebactrl($scope, $http) {
+
+}
 /**
  *
  * Pass all functions into module
@@ -3517,5 +3607,8 @@ angular
     .controller('tourCtrl', tourCtrl)
     .controller('jstreeCtrl', jstreeCtrl)
     .controller('datamapsCtrl', datamapsCtrl)
-    .controller('pdfCtrl', pdfCtrl);
+    .controller('pdfCtrl', pdfCtrl)
+    .controller('SucursalesCtrl', SucursalesCtrl)
+    .controller('CategoriaCtrl', CategoriaCtrl)
+    .controller('equiposCtrl', equiposCtrl);
 
