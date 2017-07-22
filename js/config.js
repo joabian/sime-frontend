@@ -48,11 +48,29 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
              url: "/tickets",
              templateUrl: "views/reporteform.html",
          })
-          .state('incidencias', {
+          /*.state('incidencias', {
               url: "/incidencias",
               templateUrl: "views/incidencias.html",
               data: { pageTitle: 'Incidencias' }
-          })
+          })*/
+        
+
+		 .state('incidencias', {
+		     url: "/incidencias",
+		     //abstract: true,
+            templateUrl: "views/incidencias.html",
+            data: { pageTitle: 'Incidencias' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'ui.sortable',
+                            files: ['js/plugins/ui-sortable/sortable.js']
+                        }
+                    ]);
+                }
+            }
+			})
              
          .state('sucursales', {
              url: "/sucursales",
