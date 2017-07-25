@@ -5,7 +5,7 @@
 
                 <div class="profile-element" uib-dropdown>
                     <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
-                    <a uib-dropdown-toggle href>
+                    <a uib-dropdown-toggle href="" >
                             <span class="clear">
                                 <span class="block m-t-xs">
                                     <strong class="font-bold">Juan Perez</strong>
@@ -30,6 +30,7 @@
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('areas')}">
                     <li ui-sref-active="active"><a ui-sref="equipos.agregarequipo">{{ 'Agregar' | translate }} </a></li>
                     <li ui-sref-active="active"><a ui-sref="equipos.verinventario">{{ 'Inventario' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="equipos.controlmantenimiento">{{ 'Control de mantenimiento' | translate }} </a></li>
                 </ul>
             </li>
             <li ng-class="{active: $state.includes('tickets')}">
