@@ -3546,11 +3546,10 @@ function EquiposCtrl($scope, $http) {
                      "&id_subcategoria=" + $scope.data2.subcategos.subcategoriaID +
                      "&activo=true" +
                      "&marcaEquipo=" + $scope.marcaEquipo +
-                     "&marcaEquipo="
-        "&marcaEquipo="
-        "&marcaEquipo="
-        "&marcaEquipo="
-        "&marcaEquipo="
+                     "&nombreEquipo=" + $scope.nombreEquipo
+        "&modeloEquipo="
+        "&serializado="
+        "&numeroSerie="
 
                       
         alert($scope.marcaEquipo);
