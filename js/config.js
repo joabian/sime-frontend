@@ -30,21 +30,16 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
              url: "/agregarequipo",
              templateUrl: "views/agregarequipo.html",
          })
-         .state('equipos.verinventario', {
+         .state('verinventario', {
+             
              url: "/verinventario",
              templateUrl: "views/verinventario.html",
          })
-        .state('equipos.cardio', {
+        .state('verinventario.cardio', {
             url: "/cardiovascular",
             templateUrl: "views/cardiovascular.html",
         })
-
-        .state('estado1', {
-            url: "/estado1",
-            templateUrl: "views/inven.html",
-        })
-
-
+        
         .state('equipos.controlmantenimiento', {
             url: "/controlmantenimiento",
             templateUrl: "views/controlmantenimiento.html",
@@ -55,33 +50,44 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             url: "/tickets",
             templateUrl: "views/common/content.html",
         })
-         .state('tickets.main', {
+         .state('tickets.reportelink', {
              url: "/tickets",
-             templateUrl: "views/main.html",
+             templateUrl: "views/reportelink.html",
          })
          .state('tickets.minor', {
              url: "/tickets",
-             templateUrl: "views/minor.html",
+             templateUrl: "views/reporteform.html",
          })
+          /*.state('incidencias', {
+              url: "/incidencias",
+              templateUrl: "views/incidencias.html",
+              data: { pageTitle: 'Incidencias' }
+          })*/
+        
 
-        .state('incidencias', {
-            abstract: true,
-            url: "/incidencias",
-            templateUrl: "views/common/content.html",
-        })
-         .state('incidencias.incidencia', {
-             url: "/incidencias",
-             templateUrl: "views/incidencia.html",
+		 .state('incidencias', {
+		     url: "/incidencias",
+		     //abstract: true,
+            templateUrl: "views/incidencias.html",
+            data: { pageTitle: 'Incidencias' },
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            name: 'ui.sortable',
+                            files: ['js/plugins/ui-sortable/sortable.js']
+                        }
+                    ]);
+                }
+            }
+			})
+             
+         .state('sucursales', {
+             url: "/sucursales",
+             templateUrl: "views/sucursales.html",
+             data: { pageTitle: 'Sucursales' }
          })
-         .state('incidencias.solucion', {
-             url: "/incidencias",
-             templateUrl: "views/solucion.html",
-         })
-         .state('incidencias.board', {
-             url: "/incidencias",
-             templateUrl: "views/board.html",
-         })
-
+        
         .state('areas', {
             abstract: true,
             url: "/areas",
