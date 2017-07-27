@@ -3488,17 +3488,10 @@ function ngGridCtrl($scope) {
         { Name: "Berg", Age: 19, Position: 'UI/UX Designer', Status: 'active', Date: '12.11.2013' }
     ];
 }
-function SucursalesCtrl($scope) {
-    $scope.sucursales=[
-        "Sendero",
-        "Tecnológico",
-        "Panamericana",
-        "Zaragoza"
-    ];
-}
-function CategoriaCtrl($scope, $http) {
 
-   $http.get('http://localhost:49915/api/categoria/SelectAll').success(function (data) {
+function EquiposCtrl($scope, $http) {
+
+    $http.get('http://localhost:49915/api/categoria/SelectAll').success(function (data) {
         $scope.data = {
             Categorias: data,
             catego: { categoriaID: '1', nombre: 'Cardiovascular' }
@@ -3509,57 +3502,75 @@ function CategoriaCtrl($scope, $http) {
         $http.get('http://localhost:49915/api/Subcategoria/SelectByCategoryID/' + $scope.data.catego.categoriaID).success(function (data2) {
             
             $scope.data2 = {
-                Subcategorias: data2,
-                subcategos: { subcategoriaID: "24", nombre: "N/A" }
+                Subcategorias: data2
             }
         });
 
     }
 
+    $scope.sucursales =
+      [
+       { idsucursal: 10, nombre: "Sendero" },
+       { idsucursal: 20, nombre: "Tecnologico" },
+       { idsucursal: 30, nombre: "Panamericana" },
+       { idsucursal: 40, nombre: "Zaragoza" },
+      ];
+    
     $scope.saveEquipo = function () {
 
-        var equipo = {
-            codigo: "dxx",
-            descripcion: "sample string 3",
-            fechaIngreso: new Date(),
-            id_categoria: "1",
-            id_subcategoria: "1",
-            activo: true
-        };
-        console.log(equipo);
+        var inputFileImage = document.getElementById("imguplo");
+        var file = inputFileImage.files[0];
+        var dataImg = new FormData();
+        dataImg.append('archivo', file);
+
+       
+       // var validDescrip = encodeURI($scope.descripcion);
+        
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        var today = yyyy + '-' + mm + '-' + dd;
+        
+        var equipo = "&descripcion=" + $scope.descripcion +
+                     "&fechaIngreso=" + today +
+                     "&id_categoria=" + $scope.data.catego.categoriaID +
+                     "&id_subcategoria=" + $scope.data2.subcategos.subcategoriaID +
+                     "&activo=true" +
+                     "&marcaEquipo=" + $scope.marcaEquipo +
+                     "&marcaEquipo="
+        "&marcaEquipo="
+        "&marcaEquipo="
+        "&marcaEquipo="
+        "&marcaEquipo="
+
+                      
+        alert($scope.marcaEquipo);
         var saveEq = $http(
-        {
-            method: 'post',
-            data: equipo,
-            url: 'http://localhost:49915/api/Equipo/Add'
-        });
+               {
+                   method: 'post',
+                   data: (equipo),
+                   url: 'http://localhost:49915/api/Equipo/Add',
+                   headers: { "Content-Type": "application/x-www-form-urlencoded" }
+               });
 
         saveEq.then(function (d) {
-            alert("se salvo");
+            alert("Se guardo");
         }, function (error) {
             console.log('Oops! algo salio mal al momento de guardar los datos.')
-        })
-
-
+        });   
     }
-
-   
-
-
 }
 
-function equiposCtrl($scope) {
-    $scope.equiposInfo = [
-        { IdEquipo: 1, Nombre: "Caminadora", Modelo: "00D", IDSubcategoria: 1, Serializado: 1, NumSerie: 123, Descripcion: "Caminadora prueba1", Marca: "TestX", Status: 1 },
-        { IdEquipo: 2, Nombre: "Mancuernas", Modelo: "mk", IDSubcategoria: 1, Serializado: 1, NumSerie: 456, Descripcion: "Mancuernas 20lb", Marca: "TestX", Status: 1 },
-        { IdEquipo: 3, Nombre: "Bicicleta", Modelo:"asd",IDSubcategoria: 1,Serializado:1,NumSerie:588, Descripcion:"DescripcionDD",Marca:"sdf",Status:1},
-        { IdEquipo: 4, Nombre: "Banco olimpico", Modelo:"sdf",IDSubcategoria: 2,Serializado:1,NumSerie:2551, Descripcion:"Banco",Marca:"FVG",Status:1},
-        { IdEquipo: 5, Nombre: "Barra Z", Modelo:"fs",IDSubcategoria: 3,Serializado:1,NumSerie:448, Descripcion:"Barra Z 50lb",Marca:"asdb",Status:1},
-        { IdEquipo: 6, Nombre: "Maquina multiestacion", Modelo:"erg",IDSubcategoria: 2,Serializado:1,NumSerie:369, Descripcion:"8 estaciones",Marca:"sdd",Status:1}
-    ];
-}
-
-function pruebactrl($scope, $http) {
+function InventarioCtrl($scope, $http) {
 
 }
 /**
@@ -3608,7 +3619,6 @@ angular
     .controller('jstreeCtrl', jstreeCtrl)
     .controller('datamapsCtrl', datamapsCtrl)
     .controller('pdfCtrl', pdfCtrl)
-    .controller('SucursalesCtrl', SucursalesCtrl)
-    .controller('CategoriaCtrl', CategoriaCtrl)
-    .controller('equiposCtrl', equiposCtrl);
+    .controller('InventarioCtrl', InventarioCtrl)
+    .controller('EquiposCtrl', EquiposCtrl);
 

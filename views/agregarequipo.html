@@ -1,4 +1,4 @@
-<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CategoriaCtrl">
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="EquiposCtrl">
 <div class="row">
 	<div class="col-lg-10">
             <div class="ibox float-e-margins">
@@ -7,20 +7,20 @@
       
                         </div>
                         <div class="ibox-content">
-                            <form class="form-horizontal" >
+                            <form class="form-horizontal" enctype="multipart/form-data">
                                
 								<div class="form-group"><label class="col-sm-2 control-label">Nombre</label>
-                                    <div class="col-sm-10"><input type="text" placeholder="Nombre" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="text" placeholder="Nombre"  data-ng-model="nombreequipo" class="form-control"></div>
 								</div>
 								<div class="form-group"><label class="col-sm-2 control-label">Modelo</label>
-                                    <div class="col-sm-10"><input type="text" placeholder="Modelo" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="text" placeholder="Modelo"  data-ng-model="modelo" class="form-control"></div>
 								</div>
 								<div class="form-group"><label class="col-sm-2 control-label">Marca</label>
-                                    <div class="col-sm-10"><input type="text" placeholder="Marca" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="text" placeholder="Marca"   data-ng-model="marcaEquipo" class="form-control"></div>
 								</div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Cantidad</label>
-                                    <div class="col-sm-10"><input type="number" placeholder="Cantidad" id='cantidad' class="form-control"></div>
+                                    <div class="col-sm-10"><input type="number" placeholder="Cantidad" id='cantidad'  data-ng-model="cantidad" class="form-control"></div>
                                 </div>
  
 								<div class="form-group"><label class="col-sm-2 control-label" >Categoria</label>
@@ -50,25 +50,23 @@
                                      </div>
 								</div>
 								<div class="form-group"><label class="col-sm-2 control-label">Número de serie</label>
-                                    <div class="col-sm-10"><input type="text" placeholder="Número de serie" class="form-control"></div>
+                                    <div class="col-sm-10"><input type="text" placeholder="Número de serie"  data-ng-model="noserie" class="form-control"></div>
 								</div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Sucursal</label>
+                                    <label class="col-sm-2 control-label">Sucursales</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control" name="sucursal" id='sucursal' ng-controller="SucursalesCtrl">
-                                            <option value=0 selected disabled>Sucursales</option>
-                                            <option value={{sucursal["idSucursal"]}} ng-repeat="sucursal in sucursales">{{sucursal["Nombre"]}}</option>
-
-                                        </select>
+                                        <select class="form-control" name="sucursales" id="sucursales"
+                                                ng-options="sucursal.nombre for sucursal in sucursales track by sucursal.idsucursal"
+                                                ng-model="Sucur"></select>
                                     </div>
                                 </div>
 
                                 <div class="form-group"><label class="col-sm-2 control-label">Foto</label>
                                   <div class="col-sm-10">
-                                      <div class="fileinput fileinput-new" data-provides="fileinput">
+                                      <div class="fileinput fileinput-new" data-provides="fileinput" data-ng-model="foto2">
                                           <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
                                           <div>
-                                              <span class="btn btn-default btn-file"><span class="fileinput-new">Seleccionar imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="imgUpl" id="imguplo"></span>
+                                              <span class="btn btn-default btn-file"><span class="fileinput-new">Seleccionar imagen</span><span class="fileinput-exists">Cambiar</span><input type="file"  file-model="foto" name="imgUpl" id="imguplo"></span>
                                               <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Eliminar</a>
                                           </div>
                                       </div>
@@ -77,13 +75,13 @@
 
 								<div class="form-group">
 									<label class="col-sm-2 control-label">Descripcion</label>
-									<div class="col-sm-10"><textarea class="form-control" rows="4" id='areaDescripcion' placeholder='Descripcion'></textarea></div>
+									<div class="col-sm-10"><textarea class="form-control" rows="4" id='areaDescripcion' data-ng-model="descripcion" placeholder='Descripcion'></textarea></div>
 								</div>
                                
                                 <div class="form-group">
                                     <div class="col-sm-4 col-sm-offset-2">
                                         <button class="btn btn-white" type="submit">Cancelar</button>
-                                       <button type="button" id="btnAddCategoria" ng-click="saveEquipo()" class="btn btn-info">Añadir</button>
+                                       <button type="button" id="btnAddCategoria" data-ng-click="saveEquipo();" class="btn btn-info">Añadir</button>
                                     </div>
                                 </div>
                             </form>
