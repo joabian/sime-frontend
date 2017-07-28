@@ -30,21 +30,15 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
              url: "/agregarequipo",
              templateUrl: "views/agregarequipo.html",
          })
-         .state('equipos.verinventario', {
+         .state('verinventario', {
              url: "/verinventario",
              templateUrl: "views/verinventario.html",
          })
-        .state('equipos.cardio', {
+        .state('verinventario.cardio', {
             url: "/cardiovascular",
             templateUrl: "views/cardiovascular.html",
         })
-
-        .state('estado1', {
-            url: "/estado1",
-            templateUrl: "views/inven.html",
-        })
-
-
+        
         .state('equipos.controlmantenimiento', {
             url: "/controlmantenimiento",
             templateUrl: "views/controlmantenimiento.html",
