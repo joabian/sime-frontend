@@ -53,40 +53,48 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
              url: "/tickets",
              templateUrl: "views/reportelink.html",
          })
-         .state('tickets.minor', {
+         .state('tickets.reporteform', {
              url: "/tickets",
              templateUrl: "views/reporteform.html",
          })
-          /*.state('incidencias', {
-              url: "/incidencias",
-              templateUrl: "views/incidencias.html",
-              data: { pageTitle: 'Incidencias' }
-          })*/
-        
+                
 
-		 .state('incidencias', {
-		     url: "/incidencias",
-		     //abstract: true,
+	    .state('incidencias', {
+	        abstract: true,
+	        url: "/incidencias",
+	        templateUrl: "views/common/content.html",
+	    })
+        .state('incidencias.incidencias', {
+            url: "/incidencias",
             templateUrl: "views/incidencias.html",
-            data: { pageTitle: 'Incidencias' },
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            name: 'ui.sortable',
-                            files: ['js/plugins/ui-sortable/sortable.js']
-                        }
-                    ]);
-                }
-            }
-			})
+        })
+        .state('incidencias.incidenProb', {
+            url: "/incidenProb",
+            templateUrl: "views/incidenProb.html",
+        })
+        .state('incidencias.incidenSol', {
+            url: "/incidenSol",
+            templateUrl: "views/incidenSol.html",
+        })
+        .state('incidencias.incidenCom', {
+            url: "/incidenCom",
+            templateUrl: "views/incidenCom.html",
+        })
              
-         .state('sucursales', {
-             url: "/sucursales",
-             templateUrl: "views/sucursales.html",
-             data: { pageTitle: 'Sucursales' }
-         })
-        
+        .state('sucursales', {
+            abstract: true,
+            url: "/sucursales",
+            templateUrl: "views/common/content.html",
+        })
+        .state('sucursales.sucursales', {
+            url: "/sucursales",
+            templateUrl: "views/sucursales.html",
+        })
+        .state('sucursales.sucursalEnc', {
+            url: "/sucursaleEnc",
+            templateUrl: "views/sucursalEnc.html",
+        })
+
         .state('areas', {
             abstract: true,
             url: "/areas",

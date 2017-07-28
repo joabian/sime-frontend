@@ -40,12 +40,21 @@
                     <li ui-sref-active="active"><a ui-sref="tickets.reporteform">{{ 'Formulario' | translate }} </a></li>
                 </ul>
             </li>
-            <li ui-sref-active="active">
-                <a ui-sref="incidencias"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'Incidencias' | translate }}</span> </a>
+            <li ng-class="{active: $state.includes('incidencias')}">
+                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'Incidencias' | translate }}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('incidencias')}">
+                    <li ui-sref-active="active"><a ui-sref="incidencias.incidencias">{{ 'Tablero de Incidencias' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="incidencias.incidenProb">{{ 'Abrir Incidencia' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="incidencias.incidenSol">{{ 'Registrar Solucion' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="incidencias.incidenCom">{{ 'Registrar Comentario' | translate }} </a></li>
+                </ul>
             </li>
-           
-            <li ui-sref-active="active">
-                <a ui-sref="sucursales"><i class="fa fa-pie-chart"></i> <span class="nav-label">{{ 'Sucursales' | translate }}</span> </a>
+            <li ng-class="{active: $state.includes('sucursales')}">
+                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'Sucursales/Encargados' | translate }}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('sucursales')}">
+                    <li ui-sref-active="active"><a ui-sref="sucursales.sucursales">{{ 'Sucursales Alcatraz GYM' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="sucursales.sucursalEnc">{{ 'Encargados de Sucursal' | translate }} </a></li>
+                </ul>
             </li>
             <li ng-class="{active: $state.includes('areas')}">
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'Areas Mantenimiento' | translate }}</span> <span class="fa arrow"></span></a>
