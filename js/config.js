@@ -31,7 +31,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
              templateUrl: "views/agregarequipo.html",
          })
          .state('verinventario', {
-             
              url: "/verinventario",
              templateUrl: "views/verinventario.html",
          })

@@ -3515,41 +3515,36 @@ function EquiposCtrl($scope, $http) {
        { idsucursal: 30, nombre: "Panamericana" },
        { idsucursal: 40, nombre: "Zaragoza" },
       ];
-    
-    $scope.saveEquipo = function () {
 
-        var inputFileImage = document.getElementById("imguplo");
-        var file = inputFileImage.files[0];
-        var dataImg = new FormData();
-        dataImg.append('archivo', file);
+  
 
-       
-       // var validDescrip = encodeURI($scope.descripcion);
-        
-
+    $scope.saveEquipo = function ()
+    {
+        var isSerializado = $scope.checked;
+        var serial = "N/A";
+        if (isSerializado != undefined) {
+            if (isSerializado) { if ($scope.noserie != undefined) { serial = $scope.noserie; } else { isSerializado = false;}}
+        }
+        else {isSerializado = false;}
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth() + 1; //January is 0!
         var yyyy = today.getFullYear();
 
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
+        if (dd < 10) { dd = '0' + dd;}
+        if (mm < 10) { mm = '0' + mm;}
         var today = yyyy + '-' + mm + '-' + dd;
-        
-        var equipo = "&descripcion=" + $scope.descripcion +
+       
+        var equipo = "&descripcion=" + encodeURI($scope.descripcion) +
                      "&fechaIngreso=" + today +
                      "&id_categoria=" + $scope.data.catego.categoriaID +
                      "&id_subcategoria=" + $scope.data2.subcategos.subcategoriaID +
                      "&activo=true" +
-                     "&marcaEquipo=" + $scope.marcaEquipo +
-                     "&nombreEquipo=" + $scope.nombreEquipo
-        "&modeloEquipo="
-        "&serializado="
-        "&numeroSerie="
+                     "&marcaEquipo=" + encodeURI($scope.marcaEquipo) +
+                     "&nombreEquipo=" + encodeURI($scope.nombreEquipo) +
+                     "&modeloEquipo=" + encodeURI($scope.modelo) +
+                     "&serializado=" +isSerializado +
+                     "&numeroSerie=" + serial;
 
                       
         alert($scope.marcaEquipo);
@@ -3564,6 +3559,7 @@ function EquiposCtrl($scope, $http) {
         saveEq.then(function (d) {
             alert("Se guardo");
         }, function (error) {
+            window.scrollTo(0, 0);
             console.log('Oops! algo salio mal al momento de guardar los datos.')
         });   
     }
