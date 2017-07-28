@@ -3497,7 +3497,7 @@ function SucursalesCtrl($scope) {
     ];
 }
 function CategoriaCtrl($scope, $http) {
-
+    
    $http.get('http://localhost:49915/api/categoria/SelectAll').success(function (data) {
         $scope.data = {
             Categorias: data,
@@ -3517,28 +3517,44 @@ function CategoriaCtrl($scope, $http) {
     }
 
     $scope.saveEquipo = function () {
+        //alert("hola");
+        //console.log(EquipoService.Hola());
+         //var equipo = {
+         //    codigo:"test12",
+         //    descripcion: "sample string 3",
+         //    fechaIngreso: "2017-06-27T21:57:23.513",
+         //    id_categoria: 1,
+         //    id_subcategoria: 1,
+         //    activo: true
+         //};
+         //equipo = JSON.stringify(equipo);
 
-        var equipo = {
-            codigo: "dxx",
-            descripcion: "sample string 3",
-            fechaIngreso: new Date(),
-            id_categoria: "1",
-            id_subcategoria: "1",
-            activo: true
-        };
+        var equipo = new Object();
+        equipo.codigo = "test155"
+        equipo.descripcion = "sample string 3"
+        equipo.fechaIngreso = "2017-06-27T21:57:23.513"
+        equipo.id_categoria = 1
+        equipo.id_subcategoria = 1
+        equipo.activo = true
+
         console.log(equipo);
-        var saveEq = $http(
-        {
-            method: 'post',
-            data: equipo,
-            url: 'http://localhost:49915/api/Equipo/Add'
-        });
 
-        saveEq.then(function (d) {
-            alert("se salvo");
+        $http(
+        {
+            url: 'http://localhost:49915/api/Equipo/Add',
+            method: "POST",
+            data: equipo
+            //timeout: 4000
+            //,headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8' }
+
+        }).then(function (response) {
+            console.log('success');
+            console.log("then : " + JSON.stringify(response));
         }, function (error) {
-            console.log('Oops! algo salio mal al momento de guardar los datos.')
-        })
+
+            console.log('failed');
+            console.log(error);
+        });
 
 
     }
@@ -3609,6 +3625,6 @@ angular
     .controller('datamapsCtrl', datamapsCtrl)
     .controller('pdfCtrl', pdfCtrl)
     .controller('SucursalesCtrl', SucursalesCtrl)
-    .controller('CategoriaCtrl', CategoriaCtrl)
+    .controller('CategoriaCtrl', ['$scope', '$http', CategoriaCtrl])
     .controller('equiposCtrl', equiposCtrl);
 
