@@ -2325,7 +2325,12 @@ function formValidation($scope) {
 /**
  * agileBoard - Controller for agile Board view
  */
-function agileBoard($scope) {
+function agileBoard($scope,$http) {
+
+    $http.get('http://localhost:49915/api/Equipo/SelectAll').success(function (datosEjemplo) {
+        $scope.listaEjemplo = datosEjemplo
+    });
+
 
 
     $scope.todoList = [
@@ -3489,23 +3494,41 @@ function ngGridCtrl($scope) {
     ];
 }
 
-function EquiposCtrl($scope, $http) {
+function EquiposCtrl($scope, $http,$state) {
 
+   
     $http.get('http://localhost:49915/api/categoria/SelectAll').success(function (data) {
         $scope.data = {
-            Categorias: data,
-            catego: { categoriaID: '1', nombre: 'Cardiovascular' }
+            Categorias: data,         
         }
     });
-    $scope.update = function () {
-        
-        $http.get('http://localhost:49915/api/Subcategoria/SelectByCategoryID/' + $scope.data.catego.categoriaID).success(function (data2) {
-            
+
+    $scope.update = function (id) {
+        //alert(id);
+        $http.get('http://localhost:49915/api/Subcategoria/SelectByCategoryID/' + id).success(function (data2) {
+           
             $scope.data2 = {
                 Subcategorias: data2
             }
         });
 
+    }
+    $scope.getequipo = function () {
+        $http.get("http://localhost:49915/api/Equipo/SelectAll").success(function (dataEquipo) {
+            console.log(JSON.stringify(dataEquipo));
+            $scope.dataEquipo = {
+                EquiposInfo: dataEquipo
+            }
+        });
+    }
+    $scope.getValSCS = function () {
+         $http.get("http://localhost:49915/api/Equipo/SelectAll").success(function (dataEquipo) {
+            console.log(JSON.stringify(dataEquipo));
+            $scope.dataEquipo = {
+                EquiposInfo : dataEquipo 
+            }
+        }); 
+        $state.go("verinventario.cardio");
     }
 
     $scope.sucursales =
@@ -3516,7 +3539,7 @@ function EquiposCtrl($scope, $http) {
        { idsucursal: 40, nombre: "Zaragoza" },
       ];
 
-  
+   
 
     $scope.saveEquipo = function ()
     {
@@ -3525,16 +3548,9 @@ function EquiposCtrl($scope, $http) {
         if (isSerializado != undefined) {
             if (isSerializado) { if ($scope.noserie != undefined) { serial = $scope.noserie; } else { isSerializado = false;}}
         }
+           
         else {isSerializado = false;}
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
-        var yyyy = today.getFullYear();
-
-        if (dd < 10) { dd = '0' + dd;}
-        if (mm < 10) { mm = '0' + mm;}
-        var today = yyyy + '-' + mm + '-' + dd;
-       
+        var today = new Date().toJSON();
         var equipo = "&descripcion=" + encodeURI($scope.descripcion) +
                      "&fechaIngreso=" + today +
                      "&id_categoria=" + $scope.data.catego.categoriaID +
@@ -3545,9 +3561,7 @@ function EquiposCtrl($scope, $http) {
                      "&modeloEquipo=" + encodeURI($scope.modelo) +
                      "&serializado=" +isSerializado +
                      "&numeroSerie=" + serial;
-
-                      
-        alert($scope.marcaEquipo);
+     
         var saveEq = $http(
                {
                    method: 'post',
