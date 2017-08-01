@@ -49,6 +49,68 @@
  *
  *
  */
+function addArea($scope, $http)
+{
+    $http.get('http://localhost:49915/api/Usuarios/SelectAll').success(function (data) {
+        $scope.encargados = data;
+    }, function (error) {
+        $log.error('Oops! Something went wrong while fetching the data.')
+    })
+
+    $http.get('http://localhost:49915/api/Sucursales/SelectAll').success(function (data) {
+        $scope.sucursales = data;
+    }, function (error) {
+        $log.error('Oops! Something went wrong while fetching the data.')
+    });
+
+  
+
+
+
+    $scope.saveArea = function () {
+
+        var today = new Date();
+        var todayJson = today.toJSON();
+
+        alert($scope.nombre + '' + $scope.descripcion + '' + $scope.sucursal + '' + $scope.encargado);
+        var Area = 
+            "&nombre=" + encodeURI($scope.nombre) +
+            "&descripcion=" + encodeURI($scope.descripcion) +
+            "&idSucursal="+ encodeURI($scope.sucursal)+
+            "&usuarioEncargado=" + encodeURI($scope.encargado) +
+            "&Activo="+ true+
+            "&fechaIngreso="+todayJson;
+
+            //alert(Area);
+        var saveAr = $http({
+            method: 'post',
+            data: (Area),
+            url: 'http://localhost:49915/api/Areas/Add',
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        });
+        saveAr.then(function (d, SweetAlert) {
+            alert('se guardo');
+            SweetAlert.swal({
+            title: "Welcome in Alerts",
+            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        });
+        }, function (error) {
+            console.log('Oops Something went wrong while fetching the data.')
+        });
+    };
+}
+
+
+function AreasCtrl($scope, $http, DTOptionsBuilder)
+{
+    $http.get('http://localhost:49915/api/vwAreas/SelectAll').success(function (data) {
+        $scope.areas = data;
+    }, function (error)  
+    {  
+        $log.error('Oops! Something went wrong while fetching the data.')  
+    });
+}
+
 
 /**
  * MainCtrl - controller
@@ -2966,7 +3028,7 @@ function datatablesCtrl($scope,DTOptionsBuilder){
             {extend: 'copy'},
             {extend: 'csv'},
             {extend: 'excel', title: 'ExampleFile'},
-            {extend: 'pdf', title: 'ExampleFile'},
+            {extend: 'pdf', title: 'ExampleFile'},  
 
             {extend: 'print',
                 customize: function (win){
@@ -2986,32 +3048,112 @@ function datatablesCtrl($scope,DTOptionsBuilder){
     $scope.persons = [
         {
             id: '1',
-            firstName: 'Monica',
-            lastName: 'Smith'
+            Area: 'Monica',
+            Sucursal: 'Smith',
+            Status: 'Temporal',
+            Encargado: 'Jose'
         },
         {
             id: '2',
-            firstName: 'Sandra',
-            lastName: 'Jackson'
+            Area: 'Sandra',
+            Sucursal: 'Jackson',
+            Status: 'Permanente',
+            Encargado: 'Jose'
         },
         {
             id: '3',
-            firstName: 'John',
-            lastName: 'Underwood'
+            Area: 'John',
+            Sucursal: 'Underwood',
+            Status: 'Temporal',
+            Encargado: 'Jose'
         },
         {
             id: '4',
-            firstName: 'Chris',
-            lastName: 'Johnatan'
+            Area: 'Chris',
+            Sucursal: 'Johnatan',
+            Status: 'Permanente',
+            Encargado: 'Jose'
         },
         {
             id: '5',
-            firstName: 'Kim',
-            lastName: 'Rosowski'
+            Area: 'Kim',
+            Sucursal: 'Rosowski',
+            Status: 'Temporal',
+            Encargado: 'Jose'
         }
     ];
 
+
 }
+
+
+//function AreasCtrl($scope, DTOptionsBuilder) {
+
+//    $scope.dtOptions = DTOptionsBuilder.newOptions()
+//        .withDOM('<"html5buttons"B>lTfgitp')
+//        .withButtons([
+//            { extend: 'copy' },
+//            { extend: 'csv' },
+//            { extend: 'excel', title: 'ExampleFile' },
+//            { extend: 'pdf', title: 'ExampleFile' },
+
+//            {
+//                extend: 'print',
+//                customize: function (win) {
+//                    $(win.document.body).addClass('white-bg');
+//                    $(win.document.body).css('font-size', '10px');
+
+//                    $(win.document.body).find('table')
+//                        .addClass('compact')
+//                        .css('font-size', 'inherit');
+//                }
+//            }
+//        ]);
+
+//    /**
+
+//     * persons - Data used in Tables view for Data Tables plugin
+//     */
+//    $scope.persons = [
+//        {
+//            id: '1',
+//            Area: 'Monica',
+//            Sucursal: 'Smith',
+//            Status: 'Temporal',
+//            Encargado: 'Jose'
+//        },
+//        {
+//            id: '2',
+//            Area: 'Sandra',
+//            Sucursal: 'Jackson',
+//            Status: 'Permanente',
+//            Encargado: 'Jose'
+//        },
+//        {
+//            id: '3',
+//            Area: 'John',
+//            Sucursal: 'Underwood',
+//            Status: 'Temporal',
+//            Encargado: 'Jose'
+//        },
+//        {
+//            id: '4',
+//            Area: 'Chris',
+//            Sucursal: 'Johnatan',
+//            Status: 'Permanente',
+//            Encargado: 'Jose'
+//        },
+//        {
+//            id: '5',
+//            Area: 'Kim',
+//            Sucursal: 'Rosowski',
+//            Status: 'Temporal',
+//            Encargado: 'Jose'
+//        }
+//    ];
+
+
+//}
 
 function truncateCtrl($scope){
 
@@ -3512,10 +3654,12 @@ angular
     .controller('toastrCtrl', toastrCtrl)
     .controller('loadingCtrl', loadingCtrl)
     .controller('datatablesCtrl', datatablesCtrl)
+    .controller('AreasCtrl', AreasCtrl)
     .controller('truncateCtrl', truncateCtrl)
     .controller('touchspinCtrl', touchspinCtrl)
     .controller('tourCtrl', tourCtrl)
     .controller('jstreeCtrl', jstreeCtrl)
     .controller('datamapsCtrl', datamapsCtrl)
-    .controller('pdfCtrl', pdfCtrl);
+    .controller('pdfCtrl', pdfCtrl)
+    .controller('addArea', addArea);
 
