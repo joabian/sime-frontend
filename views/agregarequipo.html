@@ -2,10 +2,11 @@
 <div class="row">
 	<div class="col-lg-10">
             <div class="ibox float-e-margins">
-						<div class="ibox-title text-center">
-                            <h5>Registrar equipo</h5>
-      
-                        </div>
+                <div class="row wrapper border-bottom white-bg page-heading">
+                    <div class="col-lg-10">
+                        <h2>Registrar equipo</h2>
+                    </div>
+                </div>
                         <div class="ibox-content">
                             <form class="form-horizontal" enctype="multipart/form-data">
                                
@@ -22,8 +23,9 @@
 								<div class="form-group"><label class="col-sm-2 control-label" >Categoria</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" name="CategoriaEquipo" id="CategoriaEquipo"
+                                                  ng-init="somethingHere = somethingHere || options[0].value"
                                                 ng-options="categoria.nombre for categoria in data.Categorias track by categoria.categoriaID"
-                                                ng-model="data.catego" ng-change="update()" >
+                                                ng-model="data.catego" ng-change="update(data.catego.categoriaID)" >
 
                                         </select>
 									</div>
