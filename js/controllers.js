@@ -2325,9 +2325,12 @@ function formValidation($scope) {
 /**
  * agileBoard - Controller for agile Board view
  */
-function agileBoard($scope) {
+function agileBoard($scope,$http) {
+    $http.get("http://localhost:49915/api/Equipo/SelectAll").success(function (dataList) {
+        $scope.testequipos = dataList
 
-
+    })
+    
     $scope.todoList = [
         {
             content: 'Simply dummy text of the printing and typesetting industry.',
