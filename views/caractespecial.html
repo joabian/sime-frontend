@@ -1,0 +1,42 @@
+﻿<div class="wrapper wrapper-content animated fadeInRight" data-ng-controller="EquiposCtrl">
+   <!--header de la pagina-->
+     <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Caracteristicas especiales</h2>
+        </div>
+    </div>
+
+    <!--resto del contenido de la pagina-->
+    <div class="row">
+       <div>
+           <select class="form-control animated fadeInRight" ng-model="tipoequipo" ng-change="getequipo()">
+               <option value="">Tipo de equipo</option>
+               <option value="1">Equipo general</option>
+               <option value="2">Equipo serializado</option>
+           </select>
+           <select>
+              <option>Accion</option>
+               <option>Tiempos de mantenimiento</option>
+               <option>control de inventario</option>
+           </select>
+       </div>
+    </div>
+    <div class="row col-lg-12" >
+        <div class="col-lg-6">
+           {{dataEquipo.EquiposInfo}}
+        </div>
+        <div class="col-lg-6">
+            <select>
+                <option>Seleccione la frecuencia de mantenimiento</option>
+                <option>Cada 7 dias</option>
+                <option>Cada 15 dias</option>
+                <option>Cada 30 dias</option>
+                <option>Cada 2 meses</option>
+                <option>Cada 4 meses</option>
+                <option>Cada 6 meses</option>
+                <option>Cada 12 meses</option>
+            </select>
+        </div>
+    </div>
+    <button type="button">Guardar</button>
+</div>

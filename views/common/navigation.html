@@ -5,7 +5,7 @@
 
                 <div class="profile-element" uib-dropdown>
                     <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
-                    <a uib-dropdown-toggle href>
+                    <a uib-dropdown-toggle href="" >
                             <span class="clear">
                                 <span class="block m-t-xs">
                                     <strong class="font-bold">Juan Perez</strong>
@@ -26,25 +26,58 @@
                 </div>
             </li>
             <li ng-class="{active: $state.includes('equipos')}">
-                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'Equipos' | translate }}</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('areas')}">
+                <a href="index.html"><i class="fa fa-bicycle"></i> <span class="nav-label">{{ 'Equipos' | translate }}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('equipos')}">
                     <li ui-sref-active="active"><a ui-sref="equipos.agregarequipo">{{ 'Agregar' | translate }} </a></li>
-                    <li ui-sref-active="active"><a ui-sref="equipos.verinventario">{{ 'Inventario' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="verinventario">{{ 'Inventario' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="equipos.caracteristicasesp">{{ 'Caracteristicas especiales' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="equipos.controlmantenimiento">{{ 'Control de mantenimiento' | translate }} </a></li>
+                </ul>
+            </li>
+            <li ng-class="{active: $state.includes('areastecnico')}">
+                <a href="index.html"><i class="fa fa-gears"></i> <span class="nav-label">{{ 'Areas (Tecnico)' | translate }}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('areastecnico')}">
+                    <li ui-sref-active="active"><a ui-sref="areastecnico.controlinvetario">{{ 'Control de inventario por equipo' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="areastecnico.mantequipogeneral">{{ 'Mantenimiento de equipo general' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="areastecnico.mantequipochecklist">{{ 'Mantenimiento de equipo (checklist)' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="areastecnico.levantarticket">{{ 'Levantar tickets' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="areastecnico.levantarordcompra">{{ 'Levantar peticion de compra' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="areastecnico.resolucionproblema">{{ 'Registrar resolucion de problema' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="areastecnico.problemasolucion">{{ 'Consultar problema-solucion' | translate }} </a></li>
+                </ul>
+            </li>
+            <li ng-class="{active: $state.includes('dashboardtecnico')}">
+                <a href="index.html"><i class="fa fa-dashboard "></i> <span class="nav-label">{{ 'Dashboard (Tecnico)' | translate }}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('dashboardtecnico')}">
+                    <li ui-sref-active="active"><a ui-sref="dashboardtecnico.alertas">{{ 'Alertas' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="dashboardtecnico.statusareas">{{ 'Estatus de areas' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="dashboardtecnico.statusticket">{{ 'Estatus de tickets' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="dashboardtecnico.statusorden">{{ 'Estatus de peticiones de compra' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="dashboardtecnico.reportes">{{ 'Reportes de actividad' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="dashboardtecnico.buscar">{{ 'Buscar equipo' | translate }} </a></li>
                 </ul>
             </li>
             <li ng-class="{active: $state.includes('tickets')}">
-                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'Tickets' | translate }}</span> <span class="fa arrow"></span></a>
+                <a href="index.html"><i class="fa fa-ticket"></i> <span class="nav-label">{{ 'Tickets' | translate }}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('tickets')}">
-                    <li ui-sref-active="active"><a ui-sref="tickets.main">{{ 'Main' | translate }} </a></li>
-                    <li ui-sref-active="active"><a ui-sref="tickets.minor">{{ 'Minor' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="tickets.reportelink">{{ 'Link' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="tickets.reporteform">{{ 'Formulario' | translate }} </a></li>
                 </ul>
             </li>
             <li ng-class="{active: $state.includes('incidencias')}">
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'Incidencias' | translate }}</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('incidencias')}">
-                    <li ui-sref-active="active"><a ui-sref="incidencias.incidencia">{{ 'incidencia' | translate }} </a></li>
-                    <li ui-sref-active="active"><a ui-sref="incidencias.solucion">{{ 'solucion' | translate }} </a></li>
-                    <li ui-sref-active="active"><a ui-sref="incidencias.board">{{ 'board' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="incidencias.incidencias">{{ 'Tablero de Incidencias' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="incidencias.incidenProb">{{ 'Abrir Incidencia' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="incidencias.incidenSol">{{ 'Registrar Solucion' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="incidencias.incidenCom">{{ 'Registrar Comentario' | translate }} </a></li>
+                </ul>
+            </li>
+            <li ng-class="{active: $state.includes('sucursales')}">
+                <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">{{ 'Sucursales/Encargados' | translate }}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('sucursales')}">
+                    <li ui-sref-active="active"><a ui-sref="sucursales.sucursales">{{ 'Sucursales Alcatraz GYM' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="sucursales.sucursalEnc">{{ 'Encargados de Sucursal' | translate }} </a></li>
                 </ul>
             </li>
             <li ng-class="{active: $state.includes('areas')}">

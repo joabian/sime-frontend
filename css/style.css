@@ -6,6 +6,11 @@
  *   version 2.6
  *
 */
+
+ #rowInv{
+            background-image:url('views/../img/pattern.jpg');
+
+        }
 h1,
 h2,
 h3,

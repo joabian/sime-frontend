@@ -1,0 +1,14 @@
+﻿<div>
+    <h4>Filtrar busqueda</h4>
+    <hr>
+
+  
+    <div data-ng-controller="EquiposCtrl">
+        <div >
+            <input data-ng-repeat="categoria in data.Categorias" type="button"  value="{{categoria.nombre}}" ui-sref="verinventario.cardio" data-ng-click="update(categoria.categoriaID)">
+            
+        </div>
+       
+    </div>
+</div>
+   

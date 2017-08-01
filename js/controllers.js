@@ -2387,7 +2387,12 @@ function formValidation($scope) {
 /**
  * agileBoard - Controller for agile Board view
  */
-function agileBoard($scope) {
+function agileBoard($scope,$http) {
+
+    $http.get('http://localhost:49915/api/Equipo/SelectAll').success(function (datosEjemplo) {
+        $scope.listaEjemplo = datosEjemplo
+    });
+
 
 
     $scope.todoList = [
@@ -3614,6 +3619,111 @@ function pdfCtrl($scope) {
     $scope.httpHeaders = { Authorization: 'Bearer some-aleatory-token' };
 }
 
+function ngGridCtrl($scope) {
+    $scope.ngData = [
+        { Name: "Moroni", Age: 50, Position: 'PR Menager', Status: 'active', Date: '12.12.2014' },
+        { Name: "Teancum", Age: 43, Position: 'CEO/CFO', Status: 'deactive', Date: '10.10.2014' },
+        { Name: "Jacob", Age: 27, Position: 'UI Designer', Status: 'active', Date: '09.11.2013' },
+        { Name: "Nephi", Age: 29, Position: 'Java programmer', Status: 'deactive', Date: '22.10.2014' },
+        { Name: "Joseph", Age: 22, Position: 'Marketing manager', Status: 'active', Date: '24.08.2013' },
+        { Name: "Monica", Age: 43, Position: 'President', Status: 'active', Date: '11.12.2014' },
+        { Name: "Arnold", Age: 12, Position: 'CEO', Status: 'active', Date: '07.10.2013' },
+        { Name: "Mark", Age: 54, Position: 'Analyst', Status: 'deactive', Date: '03.03.2014' },
+        { Name: "Amelia", Age: 33, Position: 'Sales manager', Status: 'deactive', Date: '26.09.2013' },
+        { Name: "Jesica", Age: 41, Position: 'Ruby programmer', Status: 'active', Date: '22.12.2013' },
+        { Name: "John", Age: 48, Position: 'Marketing manager', Status: 'deactive', Date: '09.10.2014' },
+        { Name: "Berg", Age: 19, Position: 'UI/UX Designer', Status: 'active', Date: '12.11.2013' }
+    ];
+}
+
+function EquiposCtrl($scope, $http,$state) {
+
+   
+    $http.get('http://localhost:49915/api/categoria/SelectAll').success(function (data) {
+        $scope.data = {
+            Categorias: data,         
+        }
+    });
+
+    $scope.update = function (id) {
+        //alert(id);
+        $http.get('http://localhost:49915/api/Subcategoria/SelectByCategoryID/' + id).success(function (data2) {
+           
+            $scope.data2 = {
+                Subcategorias: data2
+            }
+        });
+
+    }
+    $scope.getequipo = function () {
+        $http.get("http://localhost:49915/api/Equipo/SelectAll").success(function (dataEquipo) {
+            console.log(JSON.stringify(dataEquipo));
+            $scope.dataEquipo = {
+                EquiposInfo: dataEquipo
+            }
+        });
+    }
+    $scope.getValSCS = function () {
+         $http.get("http://localhost:49915/api/Equipo/SelectAll").success(function (dataEquipo) {
+            console.log(JSON.stringify(dataEquipo));
+            $scope.dataEquipo = {
+                EquiposInfo : dataEquipo 
+            }
+        }); 
+        $state.go("verinventario.cardio");
+    }
+
+    $scope.sucursales =
+      [
+       { idsucursal: 10, nombre: "Sendero" },
+       { idsucursal: 20, nombre: "Tecnologico" },
+       { idsucursal: 30, nombre: "Panamericana" },
+       { idsucursal: 40, nombre: "Zaragoza" },
+      ];
+
+   
+
+    $scope.saveEquipo = function ()
+    {
+        var isSerializado = $scope.checked;
+        var serial = "N/A";
+        if (isSerializado != undefined) {
+            if (isSerializado) { if ($scope.noserie != undefined) { serial = $scope.noserie; } else { isSerializado = false;}}
+        }
+           
+        else {isSerializado = false;}
+        var today = new Date().toJSON();
+        var equipo = "&descripcion=" + encodeURI($scope.descripcion) +
+                     "&fechaIngreso=" + today +
+                     "&id_categoria=" + $scope.data.catego.categoriaID +
+                     "&id_subcategoria=" + $scope.data2.subcategos.subcategoriaID +
+                     "&activo=true" +
+                     "&marcaEquipo=" + encodeURI($scope.marcaEquipo) +
+                     "&nombreEquipo=" + encodeURI($scope.nombreEquipo) +
+                     "&modeloEquipo=" + encodeURI($scope.modelo) +
+                     "&serializado=" +isSerializado +
+                     "&numeroSerie=" + serial;
+     
+        var saveEq = $http(
+               {
+                   method: 'post',
+                   data: (equipo),
+                   url: 'http://localhost:49915/api/Equipo/Add',
+                   headers: { "Content-Type": "application/x-www-form-urlencoded" }
+               });
+
+        saveEq.then(function (d) {
+            alert("Se guardo");
+        }, function (error) {
+            window.scrollTo(0, 0);
+            console.log('Oops! algo salio mal al momento de guardar los datos.')
+        });   
+    }
+}
+
+function InventarioCtrl($scope, $http) {
+
+}
 /**
  *
  * Pass all functions into module
@@ -3661,5 +3771,10 @@ angular
     .controller('jstreeCtrl', jstreeCtrl)
     .controller('datamapsCtrl', datamapsCtrl)
     .controller('pdfCtrl', pdfCtrl)
+
     .controller('addArea', addArea);
+
+    .controller('InventarioCtrl', InventarioCtrl)
+    .controller('EquiposCtrl', EquiposCtrl);
+>>>>>>> 5569c53d6a9e14aa2f33a81e9636074e1b8ab840
 
