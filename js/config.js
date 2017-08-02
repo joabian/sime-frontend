@@ -30,20 +30,90 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
              url: "/agregarequipo",
              templateUrl: "views/agregarequipo.html",
          })
+        .state('equipos.caracteristicasesp', {
+            url: "/caracteristicas_especiales",
+            templateUrl: "views/caractespecial.html",
+        })
+        .state('equipos.controlmantenimiento', {
+            url: "/controlmantenimiento",
+            templateUrl: "views/controlmantenimiento.html",
+        })
          .state('verinventario', {
              url: "/verinventario",
              templateUrl: "views/verinventario.html",
          })
         .state('verinventario.cardio', {
             url: "/cardiovascular",
-            templateUrl: "views/cardiovascular.html",
+            views:
+           {
+                'contenInve': {		
+                    templateUrl: "views/cardiovascular.html",
+                }
+            }		
         })
-        
-        .state('equipos.controlmantenimiento', {
-            url: "/controlmantenimiento",
-            templateUrl: "views/controlmantenimiento.html",
+    
+         .state('areastecnico', {
+             abstract: true,
+             url: "/areatecnico",
+             templateUrl: "views/common/content.html",
+         })
+         .state('areastecnico.controlinvetario', {
+             url: "/control_inventario_equipo",
+             templateUrl: "views/ctrlinventecnico.html",
+         })
+        .state('areastecnico.mantequipogeneral', {
+            url: "/mantenimiento_equipo_general",
+            templateUrl: "views/man_equipo_gen.html",
         })
-        
+        .state('areastecnico.mantequipochecklist', {
+            url: "/mantenimiento_equipo_checklist",
+            templateUrl: "views/man_equipo_check.html",
+        })
+        .state('areastecnico.levantarticket', {
+            url: "/levantar_ticket",
+            templateUrl: "views/levantar_ticket_tec.html",
+        })
+        .state('areastecnico.levantarordcompra', {
+            url: "/levantar_orden_compra",
+            templateUrl: "views/levantar_ord_com.html",
+        })
+        .state('areastecnico.resolucionproblema', {
+            url: "/resolucion_problema",
+            templateUrl: "views/resol_prob.html",
+        })
+        .state('areastecnico.problemasolucion', {
+            url: "/problema_solucion",
+            templateUrl: "views/prob_sol.html",
+        })
+        .state('dashboardtecnico', {
+            abstract: true,
+            url: "/dashboardtecnico",
+            templateUrl: "views/common/content.html",
+        })
+         .state('dashboardtecnico.alertas', {
+             url: "/alertas_dshtecnico",
+             templateUrl: "views/alertas_dshtecnico.html",
+         })
+          .state('dashboardtecnico.statusareas', {
+              url: "/status_areas",
+              templateUrl: "views/dsh_tec_status_areas.html",
+          })
+          .state('dashboardtecnico.statusticket', {
+              url: "/status_tickets",
+              templateUrl: "views/dsh_tec_status_tickets.html",
+          })
+          .state('dashboardtecnico.statusorden', {
+              url: "/status_ord_compra",
+              templateUrl: "views/dsh_tec_ord_comp.html",
+          })
+          .state('dashboardtecnico.reportes', {
+              url: "/reportestecnico",
+              templateUrl: "views/dif_reportes_tec.html",
+          })
+          .state('dashboardtecnico.buscar', {
+              url: "/buscar_equipo_esp",
+              templateUrl: "views/buscar_equipo_esp.html",
+          })
         .state('tickets', {
             abstract: true,
             url: "/tickets",
@@ -80,6 +150,14 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             url: "/incidenCom",
             templateUrl: "views/incidenCom.html",
         })
+         .state('incidencias.incidenSusp', {
+             url: "/incidenSusp",
+             templateUrl: "views/incidenSusp.html",
+         })
+         .state('incidencias.incidenCerradas', {
+             url: "/incidenCerradas",
+             templateUrl: "views/incidenCerradas.html",
+         })
              
         .state('sucursales', {
             abstract: true,
@@ -94,6 +172,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             url: "/sucursaleEnc",
             templateUrl: "views/sucursalEnc.html",
         })
+         .state('sucursales.sucursalDatos', {
+             url: "/sucursaleDatos",
+             templateUrl: "views/sucursalDatos.html",
+         })
 
         .state('areas', {
             abstract: true,
@@ -107,6 +189,26 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
         .state('areas.tablero', {
             url: "/tablero",
             templateUrl: "views/tablero.html",
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
+                }
+            }
         })
 
         .state('dashboards', {
