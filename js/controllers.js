@@ -2387,14 +2387,9 @@ function formValidation($scope) {
 /**
  * agileBoard - Controller for agile Board view
  */
-function agileBoard($scope,$http) {
+function agileBoard($scope) {
 
-    $http.get('http://localhost:49915/api/Equipo/SelectAll').success(function (datosEjemplo) {
-        $scope.listaEjemplo = datosEjemplo
-    });
-
-
-
+    
     $scope.todoList = [
         {
             content: 'Simply dummy text of the printing and typesetting industry.',
@@ -3772,9 +3767,9 @@ angular
     .controller('datamapsCtrl', datamapsCtrl)
     .controller('pdfCtrl', pdfCtrl)
 
-    .controller('addArea', addArea);
+    .controller('addArea', addArea)
 
     .controller('InventarioCtrl', InventarioCtrl)
     .controller('EquiposCtrl', EquiposCtrl);
->>>>>>> 5569c53d6a9e14aa2f33a81e9636074e1b8ab840
+
 
