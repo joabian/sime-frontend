@@ -34,15 +34,13 @@
                                 </span>
                     </div>
                     <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-model="todoList">
-                        
-                        <li  ng-repeat="eq in listaEjemplo">
-                            {{eq.nombreEquipo}}
+                        <li class="{{task.statusClass}}-element" ng-repeat="task in todoList">
+                            {{task.content}}
                             <div class="agile-detail">
-                                <a href="#" class="pull-right btn btn-xs btn-white">{{eq.descripcion}}</a>
-                                <i class="fa fa-clock-o"></i> {{eq.fechaIngreso}}
-                            </div>
-                        </li>
-
+                                <a href="#" class="pull-right btn btn-xs btn-white">{{task.tagName}}</a>
+                                <i class="fa fa-clock-o"></i> {{task.date}}
+                        </div>
+                     
                     </ul>
                 </div>
             </div>

@@ -150,6 +150,14 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             url: "/incidenCom",
             templateUrl: "views/incidenCom.html",
         })
+         .state('incidencias.incidenSusp', {
+             url: "/incidenSusp",
+             templateUrl: "views/incidenSusp.html",
+         })
+         .state('incidencias.incidenCerradas', {
+             url: "/incidenCerradas",
+             templateUrl: "views/incidenCerradas.html",
+         })
              
         .state('sucursales', {
             abstract: true,
@@ -164,6 +172,10 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             url: "/sucursaleEnc",
             templateUrl: "views/sucursalEnc.html",
         })
+         .state('sucursales.sucursalDatos', {
+             url: "/sucursaleDatos",
+             templateUrl: "views/sucursalDatos.html",
+         })
 
         .state('areas', {
             abstract: true,
