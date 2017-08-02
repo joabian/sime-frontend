@@ -1,1 +1,21 @@
-﻿<h1>Control de inventario por equipo (tecnico)</h1>
+﻿<div class="wrapper wrapper-content animated fadeInRight" data-ng-controller="EquiposCtrl">
+    <!--header de la pagina-->
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Control de inventario por equipo</h2>
+        </div>
+    </div>
+    <div class="row">
+        <ul>
+            <li ng-repeat="equipcontrol in aresDelTecnico">
+                {{equipcontrol.nombre}}
+                {{equipcontrol.idarea}}
+                <ul>
+                    <li ng-if="equipcontrol.idarea == equip.idarea" ng-repeat="equip in getEquipoByIdArea">
+                        {{equip.nombrequipo}} El periodo para inventariar este equipo es: {{equip.periodoInventario}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

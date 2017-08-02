@@ -1,7 +1,6 @@
 ﻿
 <div class="wrapper wrapper-content animated fadeInRight" data-ng-controller="EquiposCtrl">
-   {{dataEquipo}}{{data2}}
-        <div class="col-lg-4 col-sm-6" style="opacity:0.8">
+        <div class="col-lg-4 col-sm-6" style="opacity:0.8" data-ng-repeat="equipo in dataEquipo.EquiposInfo">
             <div class="ibox">
                 <div class="ibox-content product-box">
                     <div class="product-imitation">
@@ -11,14 +10,14 @@
                     <div class="product-desc">
                         <small class="text-muted"></small>
                         <p>
-                            <a href="#" class="product-name"></a>
+                            <a href="#" class="product-name">{{equipo.nombreEquipo}}</a>
                         </p>
                         <div class="small m-t-xs">
                             <p>
-                                Marca: asdasd<strong></strong>
+                                Marca: {{equipo.marcaEquipo}}<strong></strong>
                             </p>
                             <p>
-                                Descripcion: asdas<strong></strong>
+                                Descripcion: {{equipo.descripcion}}<strong></strong>
                             <p rows='3' ></p>
                             </p>
                             <p>

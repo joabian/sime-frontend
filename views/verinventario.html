@@ -23,13 +23,17 @@
                 <div class="col-lg-3 col-sm-3" style="padding-top:25px;">
                     <select class="form-control animated fadeInRight" name="sucursal" id="sucursal"
                             ng-options="sucursal.nombre for sucursal in sucursales track by sucursal.idsucursal"
-                            ng-model="sucursalMod"></select>
+                            ng-model="sucursalMod">
+                      
+                    </select>
                 </div>
                 <div class="col-lg-1 col-sm-1"></div>
                 <div class="col-lg-3 col-sm-3" style="padding-top:25px;">
                     <select class="form-control animated fadeInRight" name="categoria" id="categoria"
                             ng-options="Categoria.nombre for Categoria in data.Categorias track by Categoria.categoriaID"
-                            ng-model="catego" ng-change="update(catego.categoriaID)"></select>
+                            ng-model="catego" ng-change="update(catego.categoriaID)">
+                        <option value="">Seleccione una categoria</option>
+                    </select>
                 </div>
             </div>
             <div class="row" data-ng-controller="EquiposCtrl">
