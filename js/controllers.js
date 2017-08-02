@@ -3798,4 +3798,3 @@ angular
     .controller('addArea', addArea)
     .controller('InventarioCtrl', InventarioCtrl)
     .controller('EquiposCtrl', EquiposCtrl);
-
