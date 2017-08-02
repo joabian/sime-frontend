@@ -3636,7 +3636,7 @@ function ngGridCtrl($scope) {
     ];
 }
 
-function EquiposCtrl($scope, $http,$state) {
+function EquiposCtrl($scope, $http,$state,$rootScope) {
 
    
     $http.get('http://localhost:49915/api/categoria/SelectAll').success(function (data) {
@@ -3663,26 +3663,50 @@ function EquiposCtrl($scope, $http,$state) {
             }
         });
     }
+
     $scope.getValSCS = function () {
          $http.get("http://localhost:49915/api/Equipo/SelectAll").success(function (dataEquipo) {
             console.log(JSON.stringify(dataEquipo));
-            $scope.dataEquipo = {
+            $rootScope.dataEquipo = {
                 EquiposInfo : dataEquipo 
             }
         }); 
-        $state.go("verinventario.cardio");
+         $state.go("verinventario.cardio");
     }
 
+   
     $scope.sucursales =
       [
+       { idsucursal:"0", nombre: "Seleccione un valor"},
        { idsucursal: 10, nombre: "Sendero" },
        { idsucursal: 20, nombre: "Tecnologico" },
        { idsucursal: 30, nombre: "Panamericana" },
        { idsucursal: 40, nombre: "Zaragoza" },
       ];
 
-   
+    $scope.sucursalMod = { idsucursal: "0", nombre: "Seleccione un valor" };
 
+    $scope.tareasck =
+        [
+            { idtarea: 1, nombre: "prende equipo" }, { idtarea: 2, nombre: "Sube velocidad" }, { idtarea: 3, nombre: "Baja velocidad" },
+            { idtarea: 4, nombre: "Sube Inclinacion" }, { idtarea: 5, nombre: "Baja inclinacion" }, { idtarea: 6, nombre: "Funciona Stop" },
+            { idtarea: 7, nombre: "Se mueve la maquina?" }, { idtarea: 8, nombre: "Esta alineada la banda?" }, { idtarea: 9, nombre: "Sube resistencia" },
+            { idtarea: 10, nombre: "Baja resistencia" }, { idtarea: 11, nombre: "Se mueven los brazos?" }, { idtarea: 12, nombre: "Tiene movimiento la base?" },
+            { idtarea: 13, nombre: "Amperaje de motor" }, { idtarea: 14, nombre: "Cableado electrico" }, { idtarea: 15, nombre: "Revisar tension de la banda" },
+        ];
+   
+    $scope.aresDelTecnico = [
+        { idarea: 1, nombre: "areaPesas"},
+        { idarea: 2, nombre: "MMA"},
+        { idarea: 3, nombre: "finanzas"},
+    ];
+    $scope.getEquipoByIdArea = [
+        { idarea: 1, idequipo: 12, nombrequipo: "Discos", periodoInventario: "Quincenal" },
+        { idarea: 2, idequipo: 22, nombrequipo: "Costal", periodoInventario: "Mensual" },
+        { idarea: 3, idequipo: 2, nombrequipo: "Escritorio", periodoInventario: "anual" },
+        { idarea: 2, idequipo: 25, nombrequipo: "guantes", periodoInventario: "Quincenal" },
+        { idarea: 3, idequipo: 52, nombrequipo: "lampara", periodoInventario: "mensual" }
+    ];
     $scope.saveEquipo = function ()
     {
         var isSerializado = $scope.checked;
@@ -3771,10 +3795,7 @@ angular
     .controller('jstreeCtrl', jstreeCtrl)
     .controller('datamapsCtrl', datamapsCtrl)
     .controller('pdfCtrl', pdfCtrl)
-
-    .controller('addArea', addArea);
-
+    .controller('addArea', addArea)
     .controller('InventarioCtrl', InventarioCtrl)
     .controller('EquiposCtrl', EquiposCtrl);
->>>>>>> 5569c53d6a9e14aa2f33a81e9636074e1b8ab840
 
