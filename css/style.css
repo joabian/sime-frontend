@@ -6,6 +6,11 @@
  *   version 2.6
  *
 */
+
+ #rowInv{
+            background-image:url('views/../img/pattern.jpg');
+
+        }
 h1,
 h2,
 h3,
@@ -5364,7 +5369,7 @@ del {
 }
 .product-imitation {
   text-align: center;
-  padding: 90px 0;
+  padding: 5px 0;
   background-color: #f8f8f9;
   color: #bebec3;
   font-weight: 600;
