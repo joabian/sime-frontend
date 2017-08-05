@@ -63,10 +63,6 @@ function addArea($scope, $http)
         $log.error('Oops! Something went wrong while fetching the data.')
     });
 
-  
-
-
-
     $scope.saveArea = function () {
 
         var today = new Date();
@@ -101,13 +97,22 @@ function addArea($scope, $http)
 }
 
 
-function AreasCtrl($scope, $http, DTOptionsBuilder)
+function AreasCtrl($scope, $http)
 {
     $http.get('http://localhost:49915/api/vwAreas/SelectAll').success(function (data) {
         $scope.areas = data;
     }, function (error)  
     {  
         $log.error('Oops! Something went wrong while fetching the data.')  
+    });
+}
+
+function AreasinventarioCtrl($scope, $http)
+{
+    $http.get('http://localhost:49915/api/Equipo/SelectAll').success(function (data) {
+        $scope.equipos = data;
+    }, function (error) {
+        $log.error('Oops! Something went wrong while fetching the data.')
     });
 }
 
@@ -162,7 +167,8 @@ function MainCtrl($http) {
         { text: 'Washington' },
         { text: 'Sydney' },
         { text: 'Cairo' },
-        { text: 'Beijing' }
+        { text: 'Beijing' },
+        { text: 'Kalin' }
     ];
 
     /**
@@ -3882,9 +3888,10 @@ angular
     .controller('pdfCtrl', pdfCtrl)
     .controller('addArea', addArea)
     .controller('InventarioCtrl', InventarioCtrl)
-
     .controller('EquiposCtrl', EquiposCtrl)
+    .controller('AreasinventarioCtrl', AreasinventarioCtrl)
     .controller('SucursalCtrl', SucursalCtrl)
-.controller('IncidenCtrl', IncidenCtrl);
+    .controller('IncidenCtrl', IncidenCtrl);
+
 
 
