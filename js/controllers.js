@@ -63,10 +63,6 @@ function addArea($scope, $http)
         $log.error('Oops! Something went wrong while fetching the data.')
     });
 
-  
-
-
-
     $scope.saveArea = function () {
 
         var today = new Date();
@@ -101,13 +97,22 @@ function addArea($scope, $http)
 }
 
 
-function AreasCtrl($scope, $http, DTOptionsBuilder)
+function AreasCtrl($scope, $http)
 {
     $http.get('http://localhost:49915/api/vwAreas/SelectAll').success(function (data) {
         $scope.areas = data;
     }, function (error)  
     {  
         $log.error('Oops! Something went wrong while fetching the data.')  
+    });
+}
+
+function AreasinventarioCtrl($scope, $http)
+{
+    $http.get('http://localhost:49915/api/Equipo/SelectAll').success(function (data) {
+        $scope.equipos = data;
+    }, function (error) {
+        $log.error('Oops! Something went wrong while fetching the data.')
     });
 }
 
@@ -162,7 +167,8 @@ function MainCtrl($http) {
         { text: 'Washington' },
         { text: 'Sydney' },
         { text: 'Cairo' },
-        { text: 'Beijing' }
+        { text: 'Beijing' },
+        { text: 'Kalin' }
     ];
 
     /**
@@ -3631,10 +3637,11 @@ function ngGridCtrl($scope) {
     ];
 }
 
-function EquiposCtrl($scope, $http,$state,$rootScope) {
 
+function EquiposCtrl($scope, $http,$state,$rootScope) {
    
     $http.get('http://localhost:49915/api/categoria/SelectAll').success(function (data) {
+
         $scope.data = {
             Categorias: data,         
         }
@@ -3720,9 +3727,12 @@ function EquiposCtrl($scope, $http,$state,$rootScope) {
         }
            
         else {isSerializado = false;}
-        var today = new Date().toJSON();
+
+        var today = new Date();
+        
+        var todayJson = today.toJSON();
         var equipo = "&descripcion=" + encodeURI($scope.descripcion) +
-                     "&fechaIngreso=" + today +
+                     "&fechaIngreso=" + todayJson +
                      "&id_categoria=" + $scope.data.catego.categoriaID +
                      "&id_subcategoria=" + $scope.data2.subcategos.subcategoriaID +
                      "&activo=true" +
@@ -3731,7 +3741,6 @@ function EquiposCtrl($scope, $http,$state,$rootScope) {
                      "&modeloEquipo=" + encodeURI($scope.modelo) +
                      "&serializado=" +isSerializado +
                      "&numeroSerie=" + serial;
-     
         var saveEq = $http(
                {
                    method: 'post',
@@ -3746,6 +3755,7 @@ function EquiposCtrl($scope, $http,$state,$rootScope) {
             window.scrollTo(0, 0);
             console.log('Oops! algo salio mal al momento de guardar los datos.')
         });   
+
     }
 }
 
@@ -3888,9 +3898,11 @@ angular
     .controller('pdfCtrl', pdfCtrl)
     .controller('addArea', addArea)
     .controller('InventarioCtrl', InventarioCtrl)
-
     .controller('EquiposCtrl', EquiposCtrl)
+    .controller('AreasinventarioCtrl', AreasinventarioCtrl)
     .controller('SucursalCtrl', SucursalCtrl)
-.controller('IncidenCtrl', IncidenCtrl);
+    .controller('IncidenCtrl', IncidenCtrl);
+
+
 
 
