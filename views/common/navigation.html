@@ -69,8 +69,10 @@
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('incidencias')}">
                     <li ui-sref-active="active"><a ui-sref="incidencias.incidencias">{{ 'Tablero de Incidencias' | translate }} </a></li>
                     <li ui-sref-active="active"><a ui-sref="incidencias.incidenProb">{{ 'Abrir Incidencia' | translate }} </a></li>
-                    <li ui-sref-active="active"><a ui-sref="incidencias.incidenSol">{{ 'Registrar Solucion' | translate }} </a></li>
-                    <li ui-sref-active="active"><a ui-sref="incidencias.incidenCom">{{ 'Registrar Comentario' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="incidencias.incidenSusp">{{ 'Suspender Incidencia' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="incidencias.incidenSol">{{ 'Solucion a Incidencia' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="incidencias.incidenCom">{{ 'Registrar Comentario' | translate }} </a></li> 
+                    <li ui-sref-active="active"><a ui-sref="incidencias.incidenCerradas">{{ 'Incidencias cerradas' | translate }} </a></li>                  
                 </ul>
             </li>
             <li ng-class="{active: $state.includes('sucursales')}">
@@ -78,6 +80,7 @@
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('sucursales')}">
                     <li ui-sref-active="active"><a ui-sref="sucursales.sucursales">{{ 'Sucursales Alcatraz GYM' | translate }} </a></li>
                     <li ui-sref-active="active"><a ui-sref="sucursales.sucursalEnc">{{ 'Encargados de Sucursal' | translate }} </a></li>
+                    <li ui-sref-active="active"><a ui-sref="sucursales.sucursalDatos">{{ 'Cambiar Datos de Sucursal' | translate }} </a></li>
                 </ul>
             </li>
             <li ng-class="{active: $state.includes('areas')}">
