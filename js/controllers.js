@@ -3642,10 +3642,12 @@ function EquiposCtrl($scope, $http,$state,$rootScope) {
     $http.get('http://localhost:49915/api/sucursales/SelectAll').success(function (dataSucursal) {
         console.log(JSON.stringify(dataSucursal));
         $scope.dataSucursal = {
-            sucursales :dataSucursal,
+            sucursales :dataSucursal
         }
     });
-
+    $scope.checkValueBef = function(){
+       alert( $scope.dataSucursal.sucursalMod);
+    }
     $scope.update = function (id) {
         //alert(id);
         $http.get('http://localhost:49915/api/Subcategoria/SelectByCategoryID/' + id).success(function (data2) {
@@ -3675,7 +3677,7 @@ function EquiposCtrl($scope, $http,$state,$rootScope) {
          $state.go("verinventario.cardio");
     }
 
-    
+  
 
     $scope.tareasck = [
             { idtarea: 1, nombre: "prende equipo" }, { idtarea: 2, nombre: "Sube velocidad" }, { idtarea: 3, nombre: "Baja velocidad" },
