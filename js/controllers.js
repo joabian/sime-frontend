@@ -3802,11 +3802,17 @@ function IncidenCtrl($scope, $http, $state) {
     });
 
     $scope.saveInc = function () {
+        var isSerializado = $scope.checked;
+        var serial = "N/A";
+        if (isSerializado != undefined) {
+            if (isSerializado) { if ($scope.numserie != undefined) { serial = $scope.numserie; } else { isSerializado = false; } }
+        }
 
+        else { isSerializado = false; }
         var today = new Date().toJSON();
         var incidencia = "&usuario=" + encodeURI($scope.usuario) +
                         "&equipoID=" + encodeURI($scope.equipoID) +
-                        "&serializado=" + encodeURI($scope.serializado) +
+                        "&serializado=" + checked +
                         "&numserie=" + encodeURI($scope.numserie) +
                         "&descripcion=" + encodeURI($scope.descripcion) +
                         "&activa=true" +
