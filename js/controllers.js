@@ -3639,6 +3639,12 @@ function EquiposCtrl($scope, $http,$state,$rootScope) {
             Categorias: data,         
         }
     });
+    $http.get('http://localhost:49915/api/sucursales/SelectAll').success(function (dataSucursal) {
+        console.log(JSON.stringify(dataSucursal));
+        $scope.dataSucursal = {
+            sucursales :dataSucursal,
+        }
+    });
 
     $scope.update = function (id) {
         //alert(id);
@@ -3669,38 +3675,41 @@ function EquiposCtrl($scope, $http,$state,$rootScope) {
          $state.go("verinventario.cardio");
     }
 
-   
-    $scope.sucursales =
-      [
-       { idsucursal:"0", nombre: "Seleccione un valor"},
-       { idsucursal: 10, nombre: "Sendero" },
-       { idsucursal: 20, nombre: "Tecnologico" },
-       { idsucursal: 30, nombre: "Panamericana" },
-       { idsucursal: 40, nombre: "Zaragoza" },
-      ];
+    
 
-    $scope.sucursalMod = { idsucursal: "0", nombre: "Seleccione un valor" };
-
-    $scope.tareasck =
-        [
+    $scope.tareasck = [
             { idtarea: 1, nombre: "prende equipo" }, { idtarea: 2, nombre: "Sube velocidad" }, { idtarea: 3, nombre: "Baja velocidad" },
             { idtarea: 4, nombre: "Sube Inclinacion" }, { idtarea: 5, nombre: "Baja inclinacion" }, { idtarea: 6, nombre: "Funciona Stop" },
             { idtarea: 7, nombre: "Se mueve la maquina?" }, { idtarea: 8, nombre: "Esta alineada la banda?" }, { idtarea: 9, nombre: "Sube resistencia" },
             { idtarea: 10, nombre: "Baja resistencia" }, { idtarea: 11, nombre: "Se mueven los brazos?" }, { idtarea: 12, nombre: "Tiene movimiento la base?" },
             { idtarea: 13, nombre: "Amperaje de motor" }, { idtarea: 14, nombre: "Cableado electrico" }, { idtarea: 15, nombre: "Revisar tension de la banda" },
         ];
-   
-    $scope.aresDelTecnico = [
-        { idarea: 1, nombre: "areaPesas"},
-        { idarea: 2, nombre: "MMA"},
-        { idarea: 3, nombre: "finanzas"},
+    $scope.checkList = [
+        { idCheck: 1, idEquipo: 12, activo: true, peridoServicio: "mensual" },
+        { idCheck: 2, idEquipo: 22, activo: true, peridoServicio: "diario" },
+        { idCheck: 3, idEquipo: 52, activo: true, peridoServicio: "Mensual" },
+        { idCheck: 4, idEquipo: 22, activo:true,peridoServicio:"quincenal"}
     ];
+    $scope.tablaIds = [
+        { idcheck: 1, idtarea: 1, nombre: "prende equipo" }, { idcheck: 1, idtarea: 2, nombre: "Sube velocidad" },
+        { idcheck: 1, idtarea: 3, nombre: "Baja velocidad" }, { idcheck: 1, idtarea: 4, nombre: "Sube Inclinacion" },
+        { idcheck: 1, idtarea: 5, nombre: "Baja inclinacion" }, { idcheck: 1, idtarea: 6, nombre: "Funciona Stop" },
+        { idcheck: 2, idtarea: 1, nombre: "prende equipo" }, { idcheck: 2, idtarea: 5, nombre: "Baja inclinacion" },
+        { idcheck: 2, idtarea: 6, nombre: "Funciona Stop" }, { idcheck: 2, idtarea: 7, nombre: "Se mueve la maquina?" },
+        { idcheck: 3, idtarea: 3, nombre: "Baja velocidad" }
+    ];
+  
     $scope.getEquipoByIdArea = [
         { idarea: 1, idequipo: 12, nombrequipo: "Discos", periodoInventario: "Quincenal" },
         { idarea: 2, idequipo: 22, nombrequipo: "Costal", periodoInventario: "Mensual" },
         { idarea: 3, idequipo: 2, nombrequipo: "Escritorio", periodoInventario: "anual" },
         { idarea: 2, idequipo: 25, nombrequipo: "guantes", periodoInventario: "Quincenal" },
         { idarea: 3, idequipo: 52, nombrequipo: "lampara", periodoInventario: "mensual" }
+    ];
+    $scope.aresDelTecnico = [
+        { idarea: 1, nombre: "areaPesas"},
+        { idarea: 2, nombre: "MMA"},
+        { idarea: 3, nombre: "finanzas"},
     ];
     $scope.saveEquipo = function ()
     {

@@ -6,16 +6,28 @@
         </div>
     </div>
     <div class="row">
-        <ul>
-            <li ng-repeat="equipcontrol in aresDelTecnico">
-                {{equipcontrol.nombre}}
-                {{equipcontrol.idarea}}
-                <ul>
-                    <li ng-if="equipcontrol.idarea == equip.idarea" ng-repeat="equip in getEquipoByIdArea">
-                        {{equip.nombrequipo}} El periodo para inventariar este equipo es: {{equip.periodoInventario}}
-                    </li>
-                </ul>
-            </li>
-        </ul>
+        <div class="ibox-content">
+            <table class="table">
+               <tr>
+                   <th>Area</th>
+                   <th>Equipo(s)</th>
+                   <th>Periodo de inventario</th>
+               </tr>
+                <tbody>     
+                    <tr ng-repeat="equipcontrol in aresDelTecnico">
+                        <td>
+                            {{equipcontrol.nombre}}{{equipcontrol.idarea}}
+                        </td>
+                        <td>
+                            <p ng-if="equipcontrol.idarea == equip.idarea" ng-repeat="equip in getEquipoByIdArea"><span class="badge"> {{equip.nombrequipo}}</span></p>
+                        </td>
+                        <td>
+                            <p ng-if="equipcontrol.idarea == equip.idarea" ng-repeat="equip in getEquipoByIdArea"> {{equip.periodoInventario}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+       
     </div>
 </div>
