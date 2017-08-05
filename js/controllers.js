@@ -3752,6 +3752,87 @@ function EquiposCtrl($scope, $http,$state,$rootScope) {
 function InventarioCtrl($scope, $http) {
 
 }
+
+function SucursalCtrl($scope, $http, $state) {
+
+
+    $http.get('http://localhost:49915/api/sucursales/SelectAll').success(function (data) {
+        $scope.data = {
+            suc: data,
+        }
+    });
+
+    $scope.saveSucursal = function () {
+        
+        var today = new Date().toJSON();
+        var sucursal = "&nombre=" + encodeURI($scope.nombre) +
+
+                     "&activo=true" +
+                      "&IdEncargado= 0"  +
+                     "&direccion=" + encodeURI($scope.direccion) +
+                     "&telefono=" + encodeURI($scope.telefono) +
+                     "&email=" + encodeURI($scope.email) +
+                     "&horario=" + encodeURI($scope.horario);
+                   
+
+        var saveSucursal = $http(
+               {
+                   method: 'post',
+                   data: (sucursal),
+                   url: 'http://localhost:49915/api/sucursales/Add',
+                   headers: { "Content-Type": "application/x-www-form-urlencoded" }
+               });
+
+        saveSucursal.then(function (d) {
+            alert("Se guardo");
+        }, function (error) {
+            window.scrollTo(0, 0);
+            console.log('Oops! algo salio mal al momento de guardar los datos.')
+        });
+    }
+
+}
+function IncidenCtrl($scope, $http, $state) {
+
+
+    $http.get('http://localhost:49915/api/incidencias/SelectAll').success(function (data) {
+        $scope.data = {
+            inc: data,
+        }
+    });
+
+    $scope.saveInc = function () {
+
+        var today = new Date().toJSON();
+        var incidencia = "&usuario=" + encodeURI($scope.usuario) +
+                        "&equipoID=" + encodeURI($scope.equipoID) +
+                        "&serializado=" + encodeURI($scope.serializado) +
+                        "&numserie=" + encodeURI($scope.numserie) +
+                        "&descripcion=" + encodeURI($scope.descripcion) +
+                        "&activa=true" +
+                        "&fechaApertura=" + today +
+                        "&fechaAtencion=null" +
+                        "&fechaClausura=null"+
+                         "&abierta=true";
+
+        var saveInc = $http(
+               {
+                   method: 'post',
+                   data: (incidencia),
+                   url: 'http://localhost:49915/api/incidencias/Add',
+                   headers: { "Content-Type": "application/x-www-form-urlencoded" }
+               });
+
+        saveInc.then(function (d) {
+            alert("Se guardo");
+        }, function (error) {
+            window.scrollTo(0, 0);
+            console.log('Oops! algo salio mal al momento de guardar los datos.')
+        });
+    }
+
+}
+
 /**
  *
  * Pass all functions into module
@@ -3801,4 +3882,9 @@ angular
     .controller('pdfCtrl', pdfCtrl)
     .controller('addArea', addArea)
     .controller('InventarioCtrl', InventarioCtrl)
-    .controller('EquiposCtrl', EquiposCtrl);
+
+    .controller('EquiposCtrl', EquiposCtrl)
+    .controller('SucursalCtrl', SucursalCtrl)
+.controller('IncidenCtrl', IncidenCtrl);
+
+
