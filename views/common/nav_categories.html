@@ -1,10 +1,14 @@
-﻿<div style="background-image:url('views/../img/assets/pattern3.jpg')">
-<h4>Filtrar busqueda</h4>
-<hr>
+﻿<div>
+    <h4>Filtrar busqueda</h4>
+    <hr>
 
-<ul class="nav" id="dc" ng-class="{in: $state.includes('verinventario')}">
-    <li ui-sref-active="active"><button type="button" value="xx" ng-model="data.catego" ui-sref="verinventario.cardio">Cardio</button></li>
-    
-</ul>
+  
+    <div data-ng-controller="EquiposCtrl">
+        <div >
+            <input data-ng-repeat="categoria in data.Categorias" type="button"  value="{{categoria.nombre}}" ui-sref="verinventario.cardio" data-ng-click="update(categoria.categoriaID)">
+            
+        </div>
+       
+    </div>
 </div>
    

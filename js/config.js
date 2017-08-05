@@ -30,20 +30,90 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
              url: "/agregarequipo",
              templateUrl: "views/agregarequipo.html",
          })
+        .state('equipos.caracteristicasesp', {
+            url: "/caracteristicas_especiales",
+            templateUrl: "views/caractespecial.html",
+        })
+        .state('equipos.controlmantenimiento', {
+            url: "/controlmantenimiento",
+            templateUrl: "views/controlmantenimiento.html",
+        })
          .state('verinventario', {
              url: "/verinventario",
              templateUrl: "views/verinventario.html",
          })
         .state('verinventario.cardio', {
             url: "/cardiovascular",
-            templateUrl: "views/cardiovascular.html",
+            views:
+           {
+                'contenInve': {		
+                    templateUrl: "views/cardiovascular.html",
+                }
+            }		
         })
-        
-        .state('equipos.controlmantenimiento', {
-            url: "/controlmantenimiento",
-            templateUrl: "views/controlmantenimiento.html",
+    
+         .state('areastecnico', {
+             abstract: true,
+             url: "/areatecnico",
+             templateUrl: "views/common/content.html",
+         })
+         .state('areastecnico.controlinvetario', {
+             url: "/control_inventario_equipo",
+             templateUrl: "views/ctrlinventecnico.html",
+         })
+        .state('areastecnico.mantequipogeneral', {
+            url: "/mantenimiento_equipo_general",
+            templateUrl: "views/man_equipo_gen.html",
         })
-        
+        .state('areastecnico.mantequipochecklist', {
+            url: "/mantenimiento_equipo_checklist",
+            templateUrl: "views/man_equipo_check.html",
+        })
+        .state('areastecnico.levantarticket', {
+            url: "/levantar_ticket",
+            templateUrl: "views/levantar_ticket_tec.html",
+        })
+        .state('areastecnico.levantarordcompra', {
+            url: "/levantar_orden_compra",
+            templateUrl: "views/levantar_ord_com.html",
+        })
+        .state('areastecnico.resolucionproblema', {
+            url: "/resolucion_problema",
+            templateUrl: "views/resol_prob.html",
+        })
+        .state('areastecnico.problemasolucion', {
+            url: "/problema_solucion",
+            templateUrl: "views/prob_sol.html",
+        })
+        .state('dashboardtecnico', {
+            abstract: true,
+            url: "/dashboardtecnico",
+            templateUrl: "views/common/content.html",
+        })
+         .state('dashboardtecnico.alertas', {
+             url: "/alertas_dshtecnico",
+             templateUrl: "views/alertas_dshtecnico.html",
+         })
+          .state('dashboardtecnico.statusareas', {
+              url: "/status_areas",
+              templateUrl: "views/dsh_tec_status_areas.html",
+          })
+          .state('dashboardtecnico.statusticket', {
+              url: "/status_tickets",
+              templateUrl: "views/dsh_tec_status_tickets.html",
+          })
+          .state('dashboardtecnico.statusorden', {
+              url: "/status_ord_compra",
+              templateUrl: "views/dsh_tec_ord_comp.html",
+          })
+          .state('dashboardtecnico.reportes', {
+              url: "/reportestecnico",
+              templateUrl: "views/dif_reportes_tec.html",
+          })
+          .state('dashboardtecnico.buscar', {
+              url: "/buscar_equipo_esp",
+              templateUrl: "views/buscar_equipo_esp.html",
+          })
         .state('tickets', {
             abstract: true,
             url: "/tickets",
@@ -53,40 +123,60 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
              url: "/tickets",
              templateUrl: "views/reportelink.html",
          })
-         .state('tickets.minor', {
+         .state('tickets.reporteform', {
              url: "/tickets",
              templateUrl: "views/reporteform.html",
          })
-          /*.state('incidencias', {
-              url: "/incidencias",
-              templateUrl: "views/incidencias.html",
-              data: { pageTitle: 'Incidencias' }
-          })*/
-        
+                
 
-		 .state('incidencias', {
-		     url: "/incidencias",
-		     //abstract: true,
+	    .state('incidencias', {
+	        abstract: true,
+	        url: "/incidencias",
+	        templateUrl: "views/common/content.html",
+	    })
+        .state('incidencias.incidencias', {
+            url: "/incidencias",
             templateUrl: "views/incidencias.html",
-            data: { pageTitle: 'Incidencias' },
-            resolve: {
-                loadPlugin: function ($ocLazyLoad) {
-                    return $ocLazyLoad.load([
-                        {
-                            name: 'ui.sortable',
-                            files: ['js/plugins/ui-sortable/sortable.js']
-                        }
-                    ]);
-                }
-            }
-			})
-             
-         .state('sucursales', {
-             url: "/sucursales",
-             templateUrl: "views/sucursales.html",
-             data: { pageTitle: 'Sucursales' }
+        })
+        .state('incidencias.incidenProb', {
+            url: "/incidenProb",
+            templateUrl: "views/incidenProb.html",
+        })
+        .state('incidencias.incidenSol', {
+            url: "/incidenSol",
+            templateUrl: "views/incidenSol.html",
+        })
+        .state('incidencias.incidenCom', {
+            url: "/incidenCom",
+            templateUrl: "views/incidenCom.html",
+        })
+         .state('incidencias.incidenSusp', {
+             url: "/incidenSusp",
+             templateUrl: "views/incidenSusp.html",
          })
-        
+         .state('incidencias.incidenCerradas', {
+             url: "/incidenCerradas",
+             templateUrl: "views/incidenCerradas.html",
+         })
+             
+        .state('sucursales', {
+            abstract: true,
+            url: "/sucursales",
+            templateUrl: "views/common/content.html",
+        })
+        .state('sucursales.sucursales', {
+            url: "/sucursales",
+            templateUrl: "views/sucursales.html",
+        })
+        .state('sucursales.sucursalEnc', {
+            url: "/sucursaleEnc",
+            templateUrl: "views/sucursalEnc.html",
+        })
+         .state('sucursales.sucursalDatos', {
+             url: "/sucursaleDatos",
+             templateUrl: "views/sucursalDatos.html",
+         })
+
         .state('areas', {
             abstract: true,
             url: "/areas",
@@ -99,6 +189,107 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
         .state('areas.tablero', {
             url: "/tablero",
             templateUrl: "views/tablero.html",
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: ['js/plugins/dataTables/datatables.min.js', 'css/plugins/dataTables/datatables.min.css']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables',
+                            files: ['js/plugins/dataTables/angular-datatables.min.js']
+                        },
+                        {
+                            serie: true,
+                            name: 'datatables.buttons',
+                            files: ['js/plugins/dataTables/angular-datatables.buttons.min.js']
+                        }
+                    ]);
+                }
+            }
+        })
+        .state('areas.areasinventario', {
+            url: "/areasinventario",
+            templateUrl: "views/areasinventario.html",
+            resolve: {
+                loadPlugin: function ($ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        {
+                            files: ['js/plugins/moment/moment.min.js']
+                        },
+                        {
+                            name: 'ui.knob',
+                            files: ['js/plugins/jsKnob/jquery.knob.js', 'js/plugins/jsKnob/angular-knob.js']
+                        },
+                        {
+                            files: ['css/plugins/ionRangeSlider/ion.rangeSlider.css', 'css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css', 'js/plugins/ionRangeSlider/ion.rangeSlider.min.js']
+                        },
+                        {
+                            insertBefore: '#loadBefore',
+                            name: 'localytics.directives',
+                            files: ['css/plugins/chosen/bootstrap-chosen.css', 'js/plugins/chosen/chosen.jquery.js', 'js/plugins/chosen/chosen.js']
+                        },
+                        {
+                            name: 'nouislider',
+                            files: ['css/plugins/nouslider/jquery.nouislider.css', 'js/plugins/nouslider/jquery.nouislider.min.js', 'js/plugins/nouslider/angular-nouislider.js']
+                        },
+                        {
+                            name: 'datePicker',
+                            files: ['css/plugins/datapicker/angular-datapicker.css', 'js/plugins/datapicker/angular-datepicker.js']
+                        },
+                        {
+                            files: ['js/plugins/jasny/jasny-bootstrap.min.js']
+                        },
+                        {
+                            files: ['css/plugins/clockpicker/clockpicker.css', 'js/plugins/clockpicker/clockpicker.js']
+                        },
+                        {
+                            name: 'ui.switchery',
+                            files: ['css/plugins/switchery/switchery.css', 'js/plugins/switchery/switchery.js', 'js/plugins/switchery/ng-switchery.js']
+                        },
+                        {
+                            name: 'colorpicker.module',
+                            files: ['css/plugins/colorpicker/colorpicker.css', 'js/plugins/colorpicker/bootstrap-colorpicker-module.js']
+                        },
+                        {
+                            name: 'ngImgCrop',
+                            files: ['js/plugins/ngImgCrop/ng-img-crop.js', 'css/plugins/ngImgCrop/ng-img-crop.css']
+                        },
+                        {
+                            serie: true,
+                            files: ['js/plugins/daterangepicker/daterangepicker.js', 'css/plugins/daterangepicker/daterangepicker-bs3.css']
+                        },
+                        {
+                            name: 'daterangepicker',
+                            files: ['js/plugins/daterangepicker/angular-daterangepicker.js']
+                        },
+                        {
+                            files: ['css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css']
+                        },
+                        {
+                            name: 'ui.select',
+                            files: ['js/plugins/ui-select/select.min.js', 'css/plugins/ui-select/select.min.css']
+                        },
+                        {
+                            files: ['css/plugins/touchspin/jquery.bootstrap-touchspin.min.css', 'js/plugins/touchspin/jquery.bootstrap-touchspin.min.js']
+                        },
+                        {
+                            name: 'ngTagsInput',
+                            files: ['js/plugins/ngTags//ng-tags-input.min.js', 'css/plugins/ngTags/ng-tags-input-custom.min.css']
+                        },
+                        {
+                            files: ['js/plugins/dualListbox/jquery.bootstrap-duallistbox.js', 'css/plugins/dualListbox/bootstrap-duallistbox.min.css']
+                        },
+                        {
+                            name: 'frapontillo.bootstrap-duallistbox',
+                            files: ['js/plugins/dualListbox/angular-bootstrap-duallistbox.js']
+                        }
+
+                    ]);
+                }
+            }
         })
 
         .state('dashboards', {

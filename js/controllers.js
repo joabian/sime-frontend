@@ -49,6 +49,73 @@
  *
  *
  */
+function addArea($scope, $http)
+{
+    $http.get('http://localhost:49915/api/Usuarios/SelectAll').success(function (data) {
+        $scope.encargados = data;
+    }, function (error) {
+        $log.error('Oops! Something went wrong while fetching the data.')
+    })
+
+    $http.get('http://localhost:49915/api/Sucursales/SelectAll').success(function (data) {
+        $scope.sucursales = data;
+    }, function (error) {
+        $log.error('Oops! Something went wrong while fetching the data.')
+    });
+
+    $scope.saveArea = function () {
+
+        var today = new Date();
+        var todayJson = today.toJSON();
+
+        alert($scope.nombre + '' + $scope.descripcion + '' + $scope.sucursal + '' + $scope.encargado);
+        var Area = 
+            "&nombre=" + encodeURI($scope.nombre) +
+            "&descripcion=" + encodeURI($scope.descripcion) +
+            "&idSucursal="+ encodeURI($scope.sucursal)+
+            "&usuarioEncargado=" + encodeURI($scope.encargado) +
+            "&Activo="+ true+
+            "&fechaIngreso="+todayJson;
+
+            //alert(Area);
+        var saveAr = $http({
+            method: 'post',
+            data: (Area),
+            url: 'http://localhost:49915/api/Areas/Add',
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        });
+        saveAr.then(function (d, SweetAlert) {
+            alert('se guardo');
+            SweetAlert.swal({
+            title: "Welcome in Alerts",
+            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        });
+        }, function (error) {
+            console.log('Oops Something went wrong while fetching the data.')
+        });
+    };
+}
+
+
+function AreasCtrl($scope, $http)
+{
+    $http.get('http://localhost:49915/api/vwAreas/SelectAll').success(function (data) {
+        $scope.areas = data;
+    }, function (error)  
+    {  
+        $log.error('Oops! Something went wrong while fetching the data.')  
+    });
+}
+
+function AreasinventarioCtrl($scope, $http)
+{
+    $http.get('http://localhost:49915/api/Equipo/SelectAll').success(function (data) {
+        $scope.equipos = data;
+    }, function (error) {
+        $log.error('Oops! Something went wrong while fetching the data.')
+    });
+}
+
 
 /**
  * MainCtrl - controller
@@ -100,7 +167,8 @@ function MainCtrl($http) {
         { text: 'Washington' },
         { text: 'Sydney' },
         { text: 'Cairo' },
-        { text: 'Beijing' }
+        { text: 'Beijing' },
+        { text: 'Kalin' }
     ];
 
     /**
@@ -2327,7 +2395,7 @@ function formValidation($scope) {
  */
 function agileBoard($scope) {
 
-
+    
     $scope.todoList = [
         {
             content: 'Simply dummy text of the printing and typesetting industry.',
@@ -2966,7 +3034,7 @@ function datatablesCtrl($scope,DTOptionsBuilder){
             {extend: 'copy'},
             {extend: 'csv'},
             {extend: 'excel', title: 'ExampleFile'},
-            {extend: 'pdf', title: 'ExampleFile'},
+            {extend: 'pdf', title: 'ExampleFile'},  
 
             {extend: 'print',
                 customize: function (win){
@@ -2986,32 +3054,112 @@ function datatablesCtrl($scope,DTOptionsBuilder){
     $scope.persons = [
         {
             id: '1',
-            firstName: 'Monica',
-            lastName: 'Smith'
+            Area: 'Monica',
+            Sucursal: 'Smith',
+            Status: 'Temporal',
+            Encargado: 'Jose'
         },
         {
             id: '2',
-            firstName: 'Sandra',
-            lastName: 'Jackson'
+            Area: 'Sandra',
+            Sucursal: 'Jackson',
+            Status: 'Permanente',
+            Encargado: 'Jose'
         },
         {
             id: '3',
-            firstName: 'John',
-            lastName: 'Underwood'
+            Area: 'John',
+            Sucursal: 'Underwood',
+            Status: 'Temporal',
+            Encargado: 'Jose'
         },
         {
             id: '4',
-            firstName: 'Chris',
-            lastName: 'Johnatan'
+            Area: 'Chris',
+            Sucursal: 'Johnatan',
+            Status: 'Permanente',
+            Encargado: 'Jose'
         },
         {
             id: '5',
-            firstName: 'Kim',
-            lastName: 'Rosowski'
+            Area: 'Kim',
+            Sucursal: 'Rosowski',
+            Status: 'Temporal',
+            Encargado: 'Jose'
         }
     ];
 
+
 }
+
+
+//function AreasCtrl($scope, DTOptionsBuilder) {
+
+//    $scope.dtOptions = DTOptionsBuilder.newOptions()
+//        .withDOM('<"html5buttons"B>lTfgitp')
+//        .withButtons([
+//            { extend: 'copy' },
+//            { extend: 'csv' },
+//            { extend: 'excel', title: 'ExampleFile' },
+//            { extend: 'pdf', title: 'ExampleFile' },
+
+//            {
+//                extend: 'print',
+//                customize: function (win) {
+//                    $(win.document.body).addClass('white-bg');
+//                    $(win.document.body).css('font-size', '10px');
+
+//                    $(win.document.body).find('table')
+//                        .addClass('compact')
+//                        .css('font-size', 'inherit');
+//                }
+//            }
+//        ]);
+
+//    /**
+
+//     * persons - Data used in Tables view for Data Tables plugin
+//     */
+//    $scope.persons = [
+//        {
+//            id: '1',
+//            Area: 'Monica',
+//            Sucursal: 'Smith',
+//            Status: 'Temporal',
+//            Encargado: 'Jose'
+//        },
+//        {
+//            id: '2',
+//            Area: 'Sandra',
+//            Sucursal: 'Jackson',
+//            Status: 'Permanente',
+//            Encargado: 'Jose'
+//        },
+//        {
+//            id: '3',
+//            Area: 'John',
+//            Sucursal: 'Underwood',
+//            Status: 'Temporal',
+//            Encargado: 'Jose'
+//        },
+//        {
+//            id: '4',
+//            Area: 'Chris',
+//            Sucursal: 'Johnatan',
+//            Status: 'Permanente',
+//            Encargado: 'Jose'
+//        },
+//        {
+//            id: '5',
+//            Area: 'Kim',
+//            Sucursal: 'Rosowski',
+//            Status: 'Temporal',
+//            Encargado: 'Jose'
+//        }
+//    ];
+
+
+//}
 
 function truncateCtrl($scope){
 
@@ -3490,37 +3638,86 @@ function ngGridCtrl($scope) {
 }
 
 
-function EquiposCtrl($scope, $http) {
-
+function EquiposCtrl($scope, $http,$state,$rootScope) {
+   
     $http.get('http://localhost:49915/api/categoria/SelectAll').success(function (data) {
 
         $scope.data = {
-            Categorias: data,
-            catego: { categoriaID: '1', nombre: 'Cardiovascular' }
+            Categorias: data,         
         }
     });
-    $scope.update = function () {
-        
-        $http.get('http://localhost:49915/api/Subcategoria/SelectByCategoryID/' + $scope.data.catego.categoriaID).success(function (data2) {
-            
+    $http.get('http://localhost:49915/api/sucursales/SelectAll').success(function (dataSucursal) {
+        console.log(JSON.stringify(dataSucursal));
+        $scope.dataSucursal = {
+            sucursales :dataSucursal,
+        }
+    });
+
+    $scope.update = function (id) {
+        //alert(id);
+        $http.get('http://localhost:49915/api/Subcategoria/SelectByCategoryID/' + id).success(function (data2) {
+           
             $scope.data2 = {
                 Subcategorias: data2
             }
         });
 
     }
+    $scope.getequipo = function () {
+        $http.get("http://localhost:49915/api/Equipo/SelectAll").success(function (dataEquipo) {
+            console.log(JSON.stringify(dataEquipo));
+            $scope.dataEquipo = {
+                EquiposInfo: dataEquipo
+            }
+        });
+    }
 
+    $scope.getValSCS = function () {
+         $http.get("http://localhost:49915/api/Equipo/SelectAll").success(function (dataEquipo) {
+            console.log(JSON.stringify(dataEquipo));
+            $rootScope.dataEquipo = {
+                EquiposInfo : dataEquipo 
+            }
+        }); 
+         $state.go("verinventario.cardio");
+    }
 
-    $scope.sucursales =
-      [
-       { idsucursal: 10, nombre: "Sendero" },
-       { idsucursal: 20, nombre: "Tecnologico" },
-       { idsucursal: 30, nombre: "Panamericana" },
-       { idsucursal: 40, nombre: "Zaragoza" },
-      ];
+    
 
+    $scope.tareasck = [
+            { idtarea: 1, nombre: "prende equipo" }, { idtarea: 2, nombre: "Sube velocidad" }, { idtarea: 3, nombre: "Baja velocidad" },
+            { idtarea: 4, nombre: "Sube Inclinacion" }, { idtarea: 5, nombre: "Baja inclinacion" }, { idtarea: 6, nombre: "Funciona Stop" },
+            { idtarea: 7, nombre: "Se mueve la maquina?" }, { idtarea: 8, nombre: "Esta alineada la banda?" }, { idtarea: 9, nombre: "Sube resistencia" },
+            { idtarea: 10, nombre: "Baja resistencia" }, { idtarea: 11, nombre: "Se mueven los brazos?" }, { idtarea: 12, nombre: "Tiene movimiento la base?" },
+            { idtarea: 13, nombre: "Amperaje de motor" }, { idtarea: 14, nombre: "Cableado electrico" }, { idtarea: 15, nombre: "Revisar tension de la banda" },
+        ];
+    $scope.checkList = [
+        { idCheck: 1, idEquipo: 12, activo: true, peridoServicio: "mensual" },
+        { idCheck: 2, idEquipo: 22, activo: true, peridoServicio: "diario" },
+        { idCheck: 3, idEquipo: 52, activo: true, peridoServicio: "Mensual" },
+        { idCheck: 4, idEquipo: 22, activo:true,peridoServicio:"quincenal"}
+    ];
+    $scope.tablaIds = [
+        { idcheck: 1, idtarea: 1, nombre: "prende equipo" }, { idcheck: 1, idtarea: 2, nombre: "Sube velocidad" },
+        { idcheck: 1, idtarea: 3, nombre: "Baja velocidad" }, { idcheck: 1, idtarea: 4, nombre: "Sube Inclinacion" },
+        { idcheck: 1, idtarea: 5, nombre: "Baja inclinacion" }, { idcheck: 1, idtarea: 6, nombre: "Funciona Stop" },
+        { idcheck: 2, idtarea: 1, nombre: "prende equipo" }, { idcheck: 2, idtarea: 5, nombre: "Baja inclinacion" },
+        { idcheck: 2, idtarea: 6, nombre: "Funciona Stop" }, { idcheck: 2, idtarea: 7, nombre: "Se mueve la maquina?" },
+        { idcheck: 3, idtarea: 3, nombre: "Baja velocidad" }
+    ];
   
-
+    $scope.getEquipoByIdArea = [
+        { idarea: 1, idequipo: 12, nombrequipo: "Discos", periodoInventario: "Quincenal" },
+        { idarea: 2, idequipo: 22, nombrequipo: "Costal", periodoInventario: "Mensual" },
+        { idarea: 3, idequipo: 2, nombrequipo: "Escritorio", periodoInventario: "anual" },
+        { idarea: 2, idequipo: 25, nombrequipo: "guantes", periodoInventario: "Quincenal" },
+        { idarea: 3, idequipo: 52, nombrequipo: "lampara", periodoInventario: "mensual" }
+    ];
+    $scope.aresDelTecnico = [
+        { idarea: 1, nombre: "areaPesas"},
+        { idarea: 2, nombre: "MMA"},
+        { idarea: 3, nombre: "finanzas"},
+    ];
     $scope.saveEquipo = function ()
     {
         var isSerializado = $scope.checked;
@@ -3528,7 +3725,9 @@ function EquiposCtrl($scope, $http) {
         if (isSerializado != undefined) {
             if (isSerializado) { if ($scope.noserie != undefined) { serial = $scope.noserie; } else { isSerializado = false;}}
         }
+           
         else {isSerializado = false;}
+
         var today = new Date();
         
         var todayJson = today.toJSON();
@@ -3542,8 +3741,6 @@ function EquiposCtrl($scope, $http) {
                      "&modeloEquipo=" + encodeURI($scope.modelo) +
                      "&serializado=" +isSerializado +
                      "&numeroSerie=" + serial;
-
-        alert(equipo)              
         var saveEq = $http(
                {
                    method: 'post',
@@ -3565,6 +3762,87 @@ function EquiposCtrl($scope, $http) {
 function InventarioCtrl($scope, $http) {
 
 }
+
+function SucursalCtrl($scope, $http, $state) {
+
+
+    $http.get('http://localhost:49915/api/sucursales/SelectAll').success(function (data) {
+        $scope.data = {
+            suc: data,
+        }
+    });
+
+    $scope.saveSucursal = function () {
+        
+        var today = new Date().toJSON();
+        var sucursal = "&nombre=" + encodeURI($scope.nombre) +
+
+                     "&activo=true" +
+                      "&IdEncargado= 0"  +
+                     "&direccion=" + encodeURI($scope.direccion) +
+                     "&telefono=" + encodeURI($scope.telefono) +
+                     "&email=" + encodeURI($scope.email) +
+                     "&horario=" + encodeURI($scope.horario);
+                   
+
+        var saveSucursal = $http(
+               {
+                   method: 'post',
+                   data: (sucursal),
+                   url: 'http://localhost:49915/api/sucursales/Add',
+                   headers: { "Content-Type": "application/x-www-form-urlencoded" }
+               });
+
+        saveSucursal.then(function (d) {
+            alert("Se guardo");
+        }, function (error) {
+            window.scrollTo(0, 0);
+            console.log('Oops! algo salio mal al momento de guardar los datos.')
+        });
+    }
+
+}
+function IncidenCtrl($scope, $http, $state) {
+
+
+    $http.get('http://localhost:49915/api/incidencias/SelectAll').success(function (data) {
+        $scope.data = {
+            inc: data,
+        }
+    });
+
+    $scope.saveInc = function () {
+
+        var today = new Date().toJSON();
+        var incidencia = "&usuario=" + encodeURI($scope.usuario) +
+                        "&equipoID=" + encodeURI($scope.equipoID) +
+                        "&serializado=" + encodeURI($scope.serializado) +
+                        "&numserie=" + encodeURI($scope.numserie) +
+                        "&descripcion=" + encodeURI($scope.descripcion) +
+                        "&activa=true" +
+                        "&fechaApertura=" + today +
+                        "&fechaAtencion=null" +
+                        "&fechaClausura=null"+
+                         "&abierta=true";
+
+        var saveInc = $http(
+               {
+                   method: 'post',
+                   data: (incidencia),
+                   url: 'http://localhost:49915/api/incidencias/Add',
+                   headers: { "Content-Type": "application/x-www-form-urlencoded" }
+               });
+
+        saveInc.then(function (d) {
+            alert("Se guardo");
+        }, function (error) {
+            window.scrollTo(0, 0);
+            console.log('Oops! algo salio mal al momento de guardar los datos.')
+        });
+    }
+
+}
+
 /**
  *
  * Pass all functions into module
@@ -3605,13 +3883,20 @@ angular
     .controller('toastrCtrl', toastrCtrl)
     .controller('loadingCtrl', loadingCtrl)
     .controller('datatablesCtrl', datatablesCtrl)
+    .controller('AreasCtrl', AreasCtrl)
     .controller('truncateCtrl', truncateCtrl)
     .controller('touchspinCtrl', touchspinCtrl)
     .controller('tourCtrl', tourCtrl)
     .controller('jstreeCtrl', jstreeCtrl)
     .controller('datamapsCtrl', datamapsCtrl)
     .controller('pdfCtrl', pdfCtrl)
+    .controller('addArea', addArea)
     .controller('InventarioCtrl', InventarioCtrl)
-    .controller('EquiposCtrl', EquiposCtrl);
+    .controller('EquiposCtrl', EquiposCtrl)
+    .controller('AreasinventarioCtrl', AreasinventarioCtrl)
+    .controller('SucursalCtrl', SucursalCtrl)
+    .controller('IncidenCtrl', IncidenCtrl);
+
+
 
 
