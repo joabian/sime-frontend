@@ -3530,16 +3530,10 @@ function EquiposCtrl($scope, $http) {
         }
         else {isSerializado = false;}
         var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
-        var yyyy = today.getFullYear();
-
-        if (dd < 10) { dd = '0' + dd;}
-        if (mm < 10) { mm = '0' + mm;}
-        var today = yyyy + '-' + mm + '-' + dd;
-       
+        
+        var todayJson = today.toJSON();
         var equipo = "&descripcion=" + encodeURI($scope.descripcion) +
-                     "&fechaIngreso=" + today +
+                     "&fechaIngreso=" + todayJson +
                      "&id_categoria=" + $scope.data.catego.categoriaID +
                      "&id_subcategoria=" + $scope.data2.subcategos.subcategoriaID +
                      "&activo=true" +
@@ -3549,8 +3543,7 @@ function EquiposCtrl($scope, $http) {
                      "&serializado=" +isSerializado +
                      "&numeroSerie=" + serial;
 
-                      
-        alert($scope.marcaEquipo);
+        alert(equipo)              
         var saveEq = $http(
                {
                    method: 'post',
