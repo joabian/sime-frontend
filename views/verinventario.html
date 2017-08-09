@@ -12,7 +12,7 @@
              padding:0;}
     </style>
  
-    <div id="rowInv" class="wrapper col-lg-12 white-bg animated fadeInRight" style="min-height:750px;" data-ng-controller="EquiposCtrl">
+    <div id="rowInv" class="wrapper col-lg-12 white-bg animated fadeInRight" style="min-height:750px;" data-ng-controller="EquiposCtrl" ng-init="update(1)">
         <div class="row" id="navTopMenu"> </div>
             <div class="row" id="navInven">
                 <div class="col-lg-3 col-sm-3">
@@ -20,26 +20,25 @@
                 </div>
                 <div class="col-lg-1 col-sm-1"></div>
 
-                <div class="col-lg-3 col-sm-3" style="padding-top:25px;">
+                <div class="col-lg-3 col-sm-3" ><label style="color:#fff">Sucurs</label>
                     <select class="form-control animated fadeInRight" name="sucursal" id="sucursal"
                             ng-options="sucursal.nombre for sucursal in dataSucursal.sucursales track by sucursal.id"
-                            ng-model="sucursalMod" ng-change="checkValueBef">
+                            ng-model="dataSucursal.sucursalMod">
+                        <option value="">Seleccione una sucursal</option>
                     </select>
                 </div>
-                <div class="col-lg-1 col-sm-1"></div>
-                <div class="col-lg-3 col-sm-3" style="padding-top:25px;">
-                    <select class="form-control animated fadeInRight" name="categoria" id="categoria"
+                
+                <div class="col-lg-3 col-sm-3"><label style="color:#fff">Categoria</label>
+                    <select class="form-control animated fadeInRight" name="categoria" id="categoria" 
                             ng-options="Categoria.nombre for Categoria in data.Categorias track by Categoria.categoriaID"
-                            ng-model="catego" ng-change="update(catego.categoriaID)">
-                        <option value="0">Seleccione una categoria</option>
+                            ng-model="data.catego" ng-change="update(data.catego.categoriaID)">
                     </select>
                 </div>
+                <div class="col-lg-1" style="padding-top:25px;"><button class="form-control" style="background:none;color:#fff;" ng-click="getSpecificEquip();">ver</button></div>
             </div>
+            <div class="row"><br /><br /></div>
             <div class="row" data-ng-controller="EquiposCtrl">
                 <div class="col-lg-3 col-sm-3" ng-include="'views/subcatSel.html'"></div>
                 <div class="col-lg-8 col-sm-8" ui-view="contenInve"></div>
             </div>
         </div>
-  
-
-

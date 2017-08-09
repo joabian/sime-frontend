@@ -5,7 +5,7 @@
     <h4>Subcategorias</h4><br />
     
     <div ng-repeat="subcategoria in data2.Subcategorias">
-        <div class="cusRadio col-lg-2 col-sm-4"><input type="radio" value="{{subcategoria.subcategoriaID}}" name="radioSelSub" ng-model="data2.subca" onclick="changeColor(this)" ng-click="getValSCS();"></div>
+        <div class="cusRadio col-lg-2 col-sm-4"><input type="radio" value="{{subcategoria.subcategoriaID}}" name="radioSelSub" ng-model="data2.subca" onclick="changeColor(this)"></div>
         <div class="cusRadioLabel col-lg-10 col-sm-8">
             {{subcategoria.nombre}}
         </div>

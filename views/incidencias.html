@@ -1,5 +1,5 @@
          
-        <div class="wrapper wrapper-content  animated fadeInRight" ng-controller="agileBoard">
+        <div class="wrapper wrapper-content  animated fadeInRight" ng-controller="IncidenCtrl">
 
             <div class="row">
                 <div class="text-center m-t-lg">
@@ -7,6 +7,7 @@
                         <h1><strong>Tablero de Incidencias</strong></h1>                       
                     </div><br />
                 </div>
+                {{data.inc}}
                     <div class="col-lg-4">
 
                         <div class="ibox">
@@ -15,12 +16,12 @@
 
                                 <h3>Abiertas</h3>
                                                               
-                                <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-model="todoList">
-                                    <li class="{{task.statusClass}}-element" ng-repeat="task in todoList">
-                                        {{task.content}}
+                                <ul ui-sortable="sortableOptions" class="sortable-list connectList agile-list" ng-model="data.inc">
+                                    <li class="{{incidencia.usuario}}-element" ng-repeat="incidencia in data.inc">
+                                        {{incidencia.equipoID}}
                                         <div class="agile-detail">
-                                            <a href="#" class="pull-right btn btn-xs btn-white">{{task.tagName}}</a>
-                                            <i class="fa fa-clock-o"></i> {{task.date}}
+                                            <a href="#" class="pull-right btn btn-xs btn-white">{{incidencia.descripcion}}</a>
+                                            <i class="fa fa-clock-o"></i> {{incidencia.fechaApertura}}
                                         </div>
                                     </li>
                                 </ul>
@@ -74,7 +75,7 @@
                     <div class="output p-m m white-bg">
 
                         <h3>Abiertas</h3>
-                        {{todoList }}
+                        {{data.inc }}
 
                         <h3>En proceso</h3>
                         {{inProgressList }}

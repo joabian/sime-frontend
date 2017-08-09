@@ -10292,6 +10292,9 @@ function $HttpProvider() {
       patch:  shallowCopy(CONTENT_TYPE_APPLICATION_JSON)
     },
 
+    useXDomain: true,
+    //withCredentials: true,
+
     xsrfCookieName: 'XSRF-TOKEN',
     xsrfHeaderName: 'X-XSRF-TOKEN',
 

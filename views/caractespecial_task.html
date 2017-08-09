@@ -1,0 +1,15 @@
+﻿<div class="animated fadeInLeft">
+    <div ng-if="valAction == 0"></div>
+    <div ng-if="valAction == 1">
+        <br />
+        <hr />
+        <ul class="sortable-list connectList agile-list col-lg-3">
+            <li ng-repeat="tareas in tareasck">
+                <input type="checkbox"> {{tareas.nombreTarea}}
+            </li>
+        </ul>
+    </div>
+    <div ng-if="valAction == 2">
+        <h3>Has escogido la opcion con el valor 2</h3>
+    </div>
+</div>
