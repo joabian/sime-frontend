@@ -34,6 +34,15 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, IdlePro
             url: "/caracteristicas_especiales",
             templateUrl: "views/caractespecial.html",
         })
+          .state('equipos.caracteristicasesp.loadTask', {
+              url: "/caracteristicas_especiales_task",
+              views:
+            {
+             'loadActionCarEsp': {
+                 templateUrl: "views/caractespecial_task.html",
+             }
+             }
+          })
         .state('equipos.controlmantenimiento', {
             url: "/controlmantenimiento",
             templateUrl: "views/controlmantenimiento.html",
