@@ -3778,12 +3778,12 @@ function SucursalCtrl($scope, $http, $state) {
         var sucursal = "&nombre=" + encodeURI($scope.nombre) +
 
                      "&activo=true" +
-                      "&IdEncargado= 0"  +
+                      "&Encargado= "  + encodeURI($scope.Encargado)
                      "&direccion=" + encodeURI($scope.direccion) +
                      "&telefono=" + encodeURI($scope.telefono) +
                      "&email=" + encodeURI($scope.email) +
                      "&horario=" + encodeURI($scope.horario);
-                   
+        alert(sucursal);
 
         var saveSucursal = $http(
                {
@@ -3802,6 +3802,8 @@ function SucursalCtrl($scope, $http, $state) {
     }
 
 }
+
+
 function IncidenCtrl($scope, $http, $state) {
 
 
@@ -3810,26 +3812,59 @@ function IncidenCtrl($scope, $http, $state) {
             inc: data,
         }
     });
+   /* $http.get('http://localhost:49915/api/incidencias/SelectAll').success(function (datas) {
+        $scope.datas = {
+            susp: datas,
+        }
+    });
+    $http.get('http://localhost:49915/api/incidencias/SelectAll').success(function (dataa) {
+        $scope.dataa = {
+            ate: dataa,
+        }
+    });*/
+
+    $scope.modA = function (id) {
+        
+        var incM = "&incidenciaID=" + id +
+            "&activa=false" +
+            "&proceso=true" + "&suspendida=false" + "&cerrada=false";
+        var mod = $http(
+               {
+                   method: 'post',
+                   data: (incM),
+                   url: 'http://localhost:49915/api/incidencias/Modify',
+                   headers: { "Content-Type": "application/x-www-form-urlencoded" }
+               });
+
+        mod.then(function (d) {
+            alert("Se cambio");
+        }, function (error) {
+            window.scrollTo(0, 0);
+            console.log('Oops! algo salio mal al momento de guardar los datos.')
+        });
+    }
 
     $scope.saveInc = function () {
-        var isSerializado = $scope.checked;
+        var isSer = $scope.checked;
         var serial = "N/A";
-        if (isSerializado != undefined) {
-            if (isSerializado) { if ($scope.numserie != undefined) { serial = $scope.numserie; } else { isSerializado = false; } }
+        if (isSer != undefined) {
+            if (isSer) { if ($scope.numSerie != undefined) { serial = $scope.numSerie; } else { isSer = false; } }
         }
 
-        else { isSerializado = false; }
+        else { isSer = false; }
         var today = new Date().toJSON();
         var incidencia = "&usuario=" + encodeURI($scope.usuario) +
                         "&equipoID=" + encodeURI($scope.equipoID) +
-                        "&serializado=" + checked +
-                        "&numserie=" + encodeURI($scope.numserie) +
+                        "&serializado=" + isSer +
+                        "&numSerie=" + encodeURI($scope.numSerie) +
                         "&descripcion=" + encodeURI($scope.descripcion) +
                         "&activa=true" +
                         "&fechaApertura=" + today +
                         "&fechaAtencion=null" +
                         "&fechaClausura=null"+
-                         "&abierta=true";
+                        "&abierta=true";
+        
+        alert(incidencia);
 
         var saveInc = $http(
                {
@@ -3846,7 +3881,6 @@ function IncidenCtrl($scope, $http, $state) {
             console.log('Oops! algo salio mal al momento de guardar los datos.')
         });
     }
-
 }
 
 /**
@@ -3902,6 +3936,7 @@ angular
     .controller('AreasinventarioCtrl', AreasinventarioCtrl)
     .controller('SucursalCtrl', SucursalCtrl)
     .controller('IncidenCtrl', IncidenCtrl);
+    
 
 
 
