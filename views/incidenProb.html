@@ -14,30 +14,26 @@
                                 
                         <div class="form-group"><label class="col-lg-2 control-label">Usuario</label>
                             <div class="col-lg-10"><input type="text" placeholder="Usuario" ng-model="usuario" class="form-control">  </div>                       
-                        </div>
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">Sucursal</label>
-                                <div class="col-lg-10"><input type="text" placeholder="Sucursal" ng-model=""class="form-control">  </div>
-                            </div>
+
+                        </div>                            
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Equipo</label>
 
-                                <div class="col-lg-10"><input type="text" ng-model="equipoID" placeholder="Equipo" class="form-control"></div>
+                                <div class="col-lg-10"><input type="text" placeholder="Equipo" ng-model="equipoID" class="form-control"></div>
+
                                 <span class="help-block m-b-none">
                                     Numero de equipo que muestra en su etiqueta
                                 </span>
                             </div>
-                            <div class="text-left">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Serializado</label>
                                 <div class="col-sm-10">
-                                    <div class="i-checks"><label> <input type="checkbox" value=""> <i></i></label></div>
+                                    <div class="i-checks"><label><input type="checkbox" ng-model="checked" aria-label="Toggle ngShow" data-ng-click="ocultar();"> <i></i></label></div>
                                 </div>
                             </div>
-                            </div>
-                            <div class="form-group">
+                            <div class="form-group check-element animate-show-hide" ng-show="checked">
                                 <label class="col-sm-2 control-label">Número de serie</label>
-                                <div class="col-sm-10"><input type="text" placeholder="Número de serie" data-ng-model="noserie" class="form-control"></div>
+                                <div class="col-sm-10"><input type="text" placeholder="Número de serie" data-ng-model="noserie" class="form-control "></div>
                             </div>
                                                           
                                 <div class="form-group">                                   
@@ -65,7 +61,7 @@
                             <br />
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">                                    
-                                    <button type="button" id="incProb" ng-click="saveInc();"  class="btn btn-info">Registrar</button>
+                                    <button type="button" id="incProb" ng-click="saveInc();" class="btn btn-info">Registrar</button>
                                 </div>
                             </div>
                             </form>

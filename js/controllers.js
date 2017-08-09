@@ -3638,9 +3638,12 @@ function ngGridCtrl($scope) {
 }
 
 
+
 function EquiposCtrl($scope, $http, $state, $rootScope) {
+
    
     $http.get('http://localhost:49915/api/categoria/SelectAll').success(function (data) {
+
         $scope.data = {
             Categorias: data,
             catego:{categoriaID:1}
@@ -3772,6 +3775,7 @@ function EquiposCtrl($scope, $http, $state, $rootScope) {
             console.log('Oops! algo salio mal al momento de guardar los datos.')
         });   
 
+
     }
 
     $scope.updateEquip = function ()
@@ -3834,6 +3838,7 @@ function EquiposCtrl($scope, $http, $state, $rootScope) {
        $http.get("http://localhost:49915/api/tareasChecks/SelectAll").success(function (dataTask) {
            $scope.tareasck = dataTask
         });
+
     }
 }
 
@@ -3854,13 +3859,21 @@ function SucursalCtrl($scope, $http, $state) {
         
         var today = new Date().toJSON();
         var sucursal = "&nombre=" + encodeURI($scope.nombre) +
+
                      "&activo=true" +
                       "&IdEncargado= 0"  +
+
+
+                     "&activo=true" +
+                      "&Encargado= "  + encodeURI($scope.Encargado)
+
                      "&direccion=" + encodeURI($scope.direccion) +
                      "&telefono=" + encodeURI($scope.telefono) +
                      "&email=" + encodeURI($scope.email) +
                      "&horario=" + encodeURI($scope.horario);
-                   
+
+        alert(sucursal);
+
 
         var saveSucursal = $http(
                {
@@ -3887,27 +3900,60 @@ function IncidenCtrl($scope, $http, $state) {
             inc: data,
         }
     });
+    /* $http.get('http://localhost:49915/api/incidencias/SelectAll').success(function (datas) {
+         $scope.datas = {
+             susp: datas,
+         }
+     });
+     $http.get('http://localhost:49915/api/incidencias/SelectAll').success(function (dataa) {
+         $scope.dataa = {
+             ate: dataa,
+         }
+     });*/
+
+    $scope.modA = function (id) {
+
+        var incM = "&incidenciaID=" + id +
+            "&activa=false" +
+            "&proceso=true" + "&suspendida=false" + "&cerrada=false";
+        var mod = $http(
+               {
+                   method: 'post',
+                   data: (incM),
+                   url: 'http://localhost:49915/api/incidencias/Modify',
+                   headers: { "Content-Type": "application/x-www-form-urlencoded" }
+               });
+
+        mod.then(function (d) {
+            alert("Se cambio");
+        }, function (error) {
+            window.scrollTo(0, 0);
+            console.log('Oops! algo salio mal al momento de guardar los datos.')
+        });
+    }
 
     $scope.saveInc = function () {
+        var isSer = $scope.checked;
+        var serial = "N/A";
+        if (isSer != undefined) {
+            if (isSer) { if ($scope.numSerie != undefined) { serial = $scope.numSerie; } else { isSer = false; } }
+        }
 
+        else { isSer = false; }
         var today = new Date().toJSON();
-        //var incidencia = "&usuario=" + encodeURI($scope.usuario) +
-        //                "&equipoID=" + encodeURI($scope.equipoID) +
-        //                "&serializado=" + encodeURI($scope.serializado) +
-        //                "&numserie=" + encodeURI($scope.numserie) +
-        //                "&descripcion=" + encodeURI($scope.descripcion) +
-        //                "&activa=true" +
-        //                "&fechaApertura=" + today +
-        //                "&fechaAtencion=null" +
-        //                "&fechaClausura=null"+
-        //                 "&abierta=true";
-
-        var incidencia ="&incidenciaID=3" + 
-                       "&equipoID=" + encodeURI($scope.equipoID) +
-                       "&descripcion=" + encodeURI($scope.descripcion) +
-                       "&activa=true" +
+        var incidencia = "&usuario=" + encodeURI($scope.usuario) +
+                        "&equipoID=" + encodeURI($scope.equipoID) +
+                        "&serializado=" + isSer +
+                        "&numSerie=" + encodeURI($scope.numSerie) +
+                        "&descripcion=" + encodeURI($scope.descripcion) +
+                        "&activa=true" +
+                        "&fechaApertura=" + today +
+                        "&fechaAtencion=null" +
+                        "&fechaClausura=null" +
                         "&abierta=true";
+
         alert(incidencia);
+
         var saveInc = $http(
                {
                    method: 'post',
@@ -3923,63 +3969,61 @@ function IncidenCtrl($scope, $http, $state) {
             console.log('Oops! algo salio mal al momento de guardar los datos.')
         });
     }
-
 }
+
+
+
 
 /**
  *
  * Pass all functions into module
  */
-angular
-    .module('inspinia')
-    .controller('MainCtrl', MainCtrl)
-    .controller('dashboardFlotOne', dashboardFlotOne)
-    .controller('dashboardFlotTwo', dashboardFlotTwo)
-    .controller('dashboardFive', dashboardFive)
-    .controller('dashboardMap', dashboardMap)
-    .controller('flotChartCtrl', flotChartCtrl)
-    .controller('rickshawChartCtrl', rickshawChartCtrl)
-    .controller('sparklineChartCtrl', sparklineChartCtrl)
-    .controller('widgetFlotChart', widgetFlotChart)
-    .controller('modalDemoCtrl', modalDemoCtrl)
-    .controller('ionSlider', ionSlider)
-    .controller('wizardCtrl', wizardCtrl)
-    .controller('CalendarCtrl', CalendarCtrl)
-    .controller('chartJsCtrl', chartJsCtrl)
-    .controller('GoogleMaps', GoogleMaps)
-    .controller('ngGridCtrl', ngGridCtrl)
-    .controller('codeEditorCtrl', codeEditorCtrl)
-    .controller('nestableCtrl', nestableCtrl)
-    .controller('notifyCtrl', notifyCtrl)
-    .controller('translateCtrl', translateCtrl)
-    .controller('imageCrop', imageCrop)
-    .controller('diff', diff)
-    .controller('idleTimer', idleTimer)
-    .controller('liveFavicon', liveFavicon)
-    .controller('formValidation', formValidation)
-    .controller('agileBoard', agileBoard)
-    .controller('draggablePanels', draggablePanels)
-    .controller('chartistCtrl', chartistCtrl)
-    .controller('metricsCtrl', metricsCtrl)
-    .controller('sweetAlertCtrl', sweetAlertCtrl)
-    .controller('selectCtrl', selectCtrl)
-    .controller('toastrCtrl', toastrCtrl)
-    .controller('loadingCtrl', loadingCtrl)
-    .controller('datatablesCtrl', datatablesCtrl)
-    .controller('AreasCtrl', AreasCtrl)
-    .controller('truncateCtrl', truncateCtrl)
-    .controller('touchspinCtrl', touchspinCtrl)
-    .controller('tourCtrl', tourCtrl)
-    .controller('jstreeCtrl', jstreeCtrl)
-    .controller('datamapsCtrl', datamapsCtrl)
-    .controller('pdfCtrl', pdfCtrl)
-    .controller('addArea', addArea)
-    .controller('InventarioCtrl', InventarioCtrl)
-    .controller('EquiposCtrl', EquiposCtrl)
-    .controller('AreasinventarioCtrl', AreasinventarioCtrl)
-    .controller('SucursalCtrl', SucursalCtrl)
-    .controller('IncidenCtrl', IncidenCtrl);
-
-
-
-
+    angular
+        .module('inspinia')
+        .controller('MainCtrl', MainCtrl)
+        .controller('dashboardFlotOne', dashboardFlotOne)
+        .controller('dashboardFlotTwo', dashboardFlotTwo)
+        .controller('dashboardFive', dashboardFive)
+        .controller('dashboardMap', dashboardMap)
+        .controller('flotChartCtrl', flotChartCtrl)
+        .controller('rickshawChartCtrl', rickshawChartCtrl)
+        .controller('sparklineChartCtrl', sparklineChartCtrl)
+        .controller('widgetFlotChart', widgetFlotChart)
+        .controller('modalDemoCtrl', modalDemoCtrl)
+        .controller('ionSlider', ionSlider)
+        .controller('wizardCtrl', wizardCtrl)
+        .controller('CalendarCtrl', CalendarCtrl)
+        .controller('chartJsCtrl', chartJsCtrl)
+        .controller('GoogleMaps', GoogleMaps)
+        .controller('ngGridCtrl', ngGridCtrl)
+        .controller('codeEditorCtrl', codeEditorCtrl)
+        .controller('nestableCtrl', nestableCtrl)
+        .controller('notifyCtrl', notifyCtrl)
+        .controller('translateCtrl', translateCtrl)
+        .controller('imageCrop', imageCrop)
+        .controller('diff', diff)
+        .controller('idleTimer', idleTimer)
+        .controller('liveFavicon', liveFavicon)
+        .controller('formValidation', formValidation)
+        .controller('agileBoard', agileBoard)
+        .controller('draggablePanels', draggablePanels)
+        .controller('chartistCtrl', chartistCtrl)
+        .controller('metricsCtrl', metricsCtrl)
+        .controller('sweetAlertCtrl', sweetAlertCtrl)
+        .controller('selectCtrl', selectCtrl)
+        .controller('toastrCtrl', toastrCtrl)
+        .controller('loadingCtrl', loadingCtrl)
+        .controller('datatablesCtrl', datatablesCtrl)
+        .controller('AreasCtrl', AreasCtrl)
+        .controller('truncateCtrl', truncateCtrl)
+        .controller('touchspinCtrl', touchspinCtrl)
+        .controller('tourCtrl', tourCtrl)
+        .controller('jstreeCtrl', jstreeCtrl)
+        .controller('datamapsCtrl', datamapsCtrl)
+        .controller('pdfCtrl', pdfCtrl)
+        .controller('addArea', addArea)
+        .controller('InventarioCtrl', InventarioCtrl)
+        .controller('EquiposCtrl', EquiposCtrl)
+        .controller('AreasinventarioCtrl', AreasinventarioCtrl)
+        .controller('SucursalCtrl', SucursalCtrl)
+        .controller('IncidenCtrl', IncidenCtrl);
